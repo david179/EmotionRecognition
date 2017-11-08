@@ -37,8 +37,8 @@ margin:20px 0px 20px 0px;
 width="119" height="120"></a>
 </center>
 
-<h3>Emotion Detection</h3>
-<h1>Project Proposal 2</h1>
+<h1>Emotion Detection</h1>
+
 <p> 
  Davide Lucchi <br>
  Mona Jalal<br>
@@ -50,20 +50,14 @@ width="119" height="120"></a>
 
 <h2> Project Problem Definition </h2>
 <p>
-The goal of the project is to evaluate the facial expression of presidential candidates 
-during debates. Using debate videos showing only one candidate at a time we are planning
- to classify and compare the facial expression and emotion of the speaker and listener.
- Our target emotions are Neutral, Happy, Sad, Surprise, Fear, Disgust, Anger, Contempt.
+Given the video of a person classify the emotion that their face is showing in each frame. 
+The algorithm will be applied to the videos of the presidential debate between Hilary Clinton and Donald
+ Trump where each video shows only one candidate. Our target emotions are 
+ Neutral, Happy, Sad, Surprise, Fear, Disgust, Anger, Contempt.
 </p>
 
 <hr>
 
-<h2></h2>
-
-<p>
-
-
-</p>
 
 
 
@@ -100,7 +94,20 @@ Your browser does not support the video tag.
 
 <h2>Desired Results</h2>
 
-<p></p>
+<p>
+The output of the algorithm should be a set of scrores of the emotion in their face.
+This scores represent the probability that the current espression is associated to that
+emotion. The scores will be recomputed for each frame or set of frames accordingly to how
+fast the algorithm is. 
+<center>
+<table class="image">
+<tr><td>
+<img width="400px" src="img/Hilary_Expected_Output.jpg"></td></tr>
+<tr><td class="caption">Algorithm Sample Output</td></tr>
+</table>
+</center>
+
+</p>
 
 <hr>
 <h2>Background Research</h2>
