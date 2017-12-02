@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score
 import cv2
 
 
-def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', train_model=True):
+def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', train_model=True,label_path=""):
         
         if train_model:
         
@@ -115,7 +115,7 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
                     data = open('{}/{}'.format(mypath,filename),'r').read()
 
                     name = '{}.jpg'.format(filename[0:filename.find("_det_0")])
-                    print(name)
+                    
                     image_names.append(name)
                     
                     intens = data[data.find("intensities")+len("intensities: 17 {"):data.find('}\nau occ')]
@@ -151,7 +151,6 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             #np.save('predict_occur.npy',final_occur)
             
             
-            print ("Start Prediction")
             print ("loading pretrained model")   
             if os.path.isfile('trained_model.bin'):
                 with open('trained_model.bin', 'rb') as f:
@@ -172,18 +171,25 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             
             em = dict([(0,'Angry'),(2,'Afraid/Fear'),(1,'Disgusted'),(3,'Happy'),(6,'Neutral'),(4,'Sad'),(5,'Surprised')])
             
-            predicted_Y = model.predict(val)
-            #print('predicted')
-            #print(predicted_Y)
-            print(image_names)
-            index = 0
-            for i in predicted_Y:
-                image = cv2.imread('predict_images/{}'.format(image_names[index]),1)
-                cv2.putText(image,em[i],(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255)) 
-                cv2.imshow('o',image)
-                cv2.waitKey(0)
-                index += 1
-                print(em[i])
+            if label_path == "":
+                predicted_Y = model.predict(val)
+                index = 0
+                cv2.namedWindow('image',cv2.WINDOW_NORMAL)
+                cv2.resizeWindow('image', 600,600)
+                for i in predicted_Y:
+                    image = cv2.imread('predict_images/{}'.format(image_names[index]),1)
+                    cv2.putText(image,em[i],(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255)) 
+                    cv2.imshow('image',image)
+                    cv2.waitKey(0)
+                    index += 1
+                    print(em[i])
+                
+            else:
+                print('loading lables from: {}'.format(label_path))
+                predict_images_labels = np.load(label_path)
+                accuracy = evaluate(model,val,predict_images_labels)
+                
+                print('accuracy: {}'.format(accuracy*100))
                 
             return 
 
@@ -198,8 +204,11 @@ def evaluate(model, X, Y):
 parser = argparse.ArgumentParser()
 parser.add_argument("-t", "--train", default="no", help="if 'yes', launch training from command line")
 parser.add_argument("-e", "--evaluate", default="no", help="if 'yes', launch evaluation on test dataset")
+parser.add_argument("-l", "--labels", default="", help="path to emotion labels of images in predict folder")
 args = parser.parse_args()
 if args.train=="yes" or args.train=="Yes" or args.train=="YES":
         train()
-if args.evaluate=="yes" or args.evaluate=="Yes" or args.evaluate=="YES":
-        train(train_model=False)
+if (args.evaluate=="yes" or args.evaluate=="Yes" or args.evaluate=="YES") and args.labels =="":
+    train(train_model=False)
+else:
+    train(train_model=False,label_path=args.labels)
