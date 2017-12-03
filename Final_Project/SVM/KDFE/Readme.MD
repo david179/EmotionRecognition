@@ -8,7 +8,7 @@ Get name of docker container
 
 Copy images to docker Openface
 
-` docker cp <folder_to_copy>  <docker_container_name>:/opt/OpenFace/build/bin/images`
+`docker cp <folder_to_copy>  <docker_container_name>:/opt/OpenFace/build/bin/images`
 
 `./FaceLandmarkImg -fdir /path_to_images -ofir /path_to_output_directory`
 

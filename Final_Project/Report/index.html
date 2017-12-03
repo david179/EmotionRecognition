@@ -272,8 +272,9 @@ and if time allows ResNet (starting with ResNet50 and extending it it to ResNet1
 
 
 <hr>
+<h3>SVM</h3>
 <p>
-A second approach involved using an SVM fed with Action Units (AU). The Action Units were extracted with OpenFace
+A second approach involved using a SVM fed with Action Units (AU). The Action Units were extracted with OpenFace
 from the datasets FER2013 and Karolinska Directed Emotional Faces (KDEF).
 The KDEF dataset consists of 4900 pictures of 70 individuals each displaying 7 different emotional expressions. Each expressions is
 photographed from 5 different angles. The fact that the debate images have high resolution and that
@@ -281,11 +282,14 @@ the candidates are for most of the time facing the camera under good lighting co
 that a wild dataset is probably not needed to obtain a good emotion prediction accuracy and so a simpler 
 dataset like KDEF could be enough. 
 The AU output of OpenFace consists of a set of occurences and intensities one for each of the AU that OpenFace is
-able to recognize. These AUs are shown below with a brief description. Therefore for each dataset image the AUs were computed and the intensities and occurences 
+able to recognize. These AUs are shown below with a brief description. For some images given the position of the face of the person it
+ was not possible to calculate the AUs. This happened usually on side pictures
+where OpenFace was not able to recognize the face. This reduced even more the size of the dataset which in the end was 3022 images.
+ Therefore for each dataset image the AUs were computed and the intensities and occurences 
 values were put in a vector. The SVM training data consisted of a matrix with such vectors. The SVM used is a Support
 Vector Classification (SVC) sklearn with a rbf kernel and ovr decision function. The training and validation data were generated 
-with the function train_test_split in order to have a random sample 
-
+with the function train_test_split in order to have a random sample.
+	
 
 
 <table style="width: 100%;" border="1">
@@ -407,6 +411,77 @@ with the function train_test_split in order to have a random sample
 </tbody>
 </table>
 
+<br>
+<table style="width: 100%;" border="1">
+<tbody>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"><b>Emotion</b></td>
+<td style="height: 21px; width: 15%;"><strong>Action Units</strong></td>
+<td style="height: 21px; width: 31.3582%;"><strong>Description</strong></td>
+<td style="height: 21px; width: 38.6418%;"><strong>Examples (Hover to Play)</strong></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Happiness / Joy</td>
+<td style="height: 21px; width: 15%;">6 + 12</td>
+<td style="height: 21px; width: 31.3582%;">Cheek Raiser, Lip Corner Puller</td>
+<td style="height: 21px; width: 38.6418%;"><img class="size-medium wp-image-12383 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150" /></p>
+<p><img class="size-medium wp-image-12388 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Sadness</td>
+<td style="height: 21px; width: 15%;">1 + 4 + 15</td>
+<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Brow Lowerer, Lip Corner Depressor</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Surprise</td>
+<td style="height: 21px; width: 15%;">1 + 2 + 5 + 26</td>
+<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Upper Lid Raiser, Jaw Drop</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Fear</td>
+<td style="height: 21px; width: 15%;">1 + 2 + 4 + 5 + 7 + 20 + 26</td>
+<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Stretcher, Jaw Drop</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Anger</td>
+<td style="height: 21px; width: 15%;">4 + 5 + 7 + 23</td>
+<td style="height: 21px; width: 31.3582%;">Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Tightener</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150"/></p>
+<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"/></p>
+<p><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Disgust</td>
+<td style="height: 21px; width: 15%;">9 + 15 + 16</td>
+<td style="height: 21px; width: 31.3582%;">Nose Wrinkler, Lip Corner Depressor, Lower Lip Depressor</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12385" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-nose-wrinkler.gif" alt="AU9 nose wrinkler" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12392" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU16-lower-lip-depressor.gif" alt="AU16 lower lip depressor" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;">Contempt</td>
+<td style="height: 21px; width: 15%;">12 + 14 (on one side of the face)</td>
+<td style="height: 21px; width: 31.3582%;">Lip Corner Puller, Dimpler</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12388" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150" /></td>
+</tr>
+</tbody>
+</table>
 
 
 <h2>References</h2>
