@@ -1,0 +1,447 @@
+
+<html>
+<head>
+<title> CS585 Project  </title>
+<style>
+<!--
+body{
+font-family: 'Trebuchet MS', Verdana;
+}
+p{
+font-family: 'Trebuchet MS', Times;
+margin: 10px 10px 15px 20px;
+}
+h3{
+margin: 5px;
+}
+h2{
+margin: 10px;
+}
+h1{
+margin: 10px 0px 0px 20px;
+}
+div.main-body{
+align:center;
+margin: 30px;
+}
+hr{
+margin:20px 0px 20px 0px;
+}
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+-->
+</style>
+</head>
+
+<body>
+<center>
+<a href="http://www.bu.edu"><img border="0" src="http://www.cs.bu.edu/fac/betke/images/bu-logo.gif"
+width="119" height="120"></a>
+</center>
+
+<h1>Emotion Detection</h1>
+
+<p> 
+ Davide Lucchi <br>
+ Mona Jalal<br>
+ Silvia Ionescu<br>
+ 12/3/2017 
+</p>
+
+<p class="main-body">
+
+<h2> Project Problem Definition </h2>
+<p>
+Given the video of a person classify the emotion that their face is showing in each frame. 
+The algorithm will be applied to the videos of the 2016 presidential debate between Hilary Clinton and Donald
+Trump where each video shows only one candidate. Our target emotions are
+neutral, happy, sad, surprise, fear, disgust and anger.
+
+</p>
+<p>
+    Emotion recognition has many applications like smart home automation, self-driving cars, improving the classroom dynamics based on the students' emotion, and helping people with disabilities based on their emotion.
+</p>
+<hr>
+
+
+
+
+<h2>Input data</h2>
+<p>Hillary Clinton and Donald Trump's Presidential Debate on October 19th, 2016
+    <br>
+     This dataset is given to us by Professor Margrit Betke's research group. 
+     The video is modified so that the video is cropped in half so that we can see the individual candidates. 
+</p>
+
+
+
+<table class="center">
+
+<tr>
+<center>
+<td align="center" valign="middle">Donald Trump</td>
+<td align="center" valign="middle">Hilary Clinton</td>
+</center>
+</tr>
+<tr>
+<td>
+<video width="320" height="240" controls>
+  <source src="videos/Donald_Trump.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</td>
+<td>
+<video width="320" height="240" controls>
+ <source src="videos/Hilary_Clinton.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+</table>
+</p>
+
+<hr>
+
+
+<h2>Desired Results</h2>
+
+<p>
+The output of the algorithm should be a set of scores of the emotion in the candidate's face. 
+This scores represent the probability that the current espression is associated to that
+emotion. The scores are recomputed for each set of frames.
+<center>
+<table class="image">
+<tr>
+	<td><img width="200px" src="img/H1.jpg"></td>
+	<td><img width="200px" src="img/H2.jpg"></td>
+	<td><img width="200px" src="img/H3.jpg"></td>
+</tr>
+<tr>
+	<td><img width="200px" src="img/T1.jpg"></td>
+	<td><img width="200px" src="img/T2.jpg"></td>
+	<td><img width="200px" src="img/T3.jpg"></td>
+</tr>
+
+</table>
+</center>
+
+</p>
+
+<hr>
+<h2>Related Work</h2>
+
+<p>
+Facial expressions are one of the most important non-verbal ways that human beings convey internal emotion.
+This means that there have been significant efforts to develop reliable automated face expression recognition (FER) systems
+that can understand human emotion and can interact with humans more naturally. One of the main problems for these systems is the
+fact that they have to operate in uncontrolled environments where the scene lighting, camera view, image resolution, background, 
+users pose can have significant variations. With the rise of deep learning systems and big data systems, we are now able to have training
+    data in the order of 500k image samples which are precisely annotated using multiple Amazon Mechanical Turk crowd workers for each image. Having large
+    training dataset helps us with being able to shoot for very deep neural networks that can learn new patterns and detect emotions while the
+    conventional computer vision algorithms or shallow neural networks might fail.
+</p>
+<p>
+There have been a few models developed to quantify facial expressions and behaviors:
+<ul>
+  <li> Categorical model - emotion is chosen from a list of categories [4]</li>
+  <li> Dimensional model - a value is chosen over a continuous emotional scale (valence and arousal)[5] </li>
+  <li> Facial Action Coding System (FACS) model - all possible facial actions are described in terms of Action Units (AUs)[6]</li>
+ 
+</ul>
+</p>
+
+<p>
+Datasets of facial expressions in the wild have received a spacial attention due to the uncontrolled environment 
+setting that FER systems have be applied to.   
+</p>
+
+<p>
+The Facial Expression Recognition 2013 (FER-2013) datatset was introduced in the ICML 2013 challenge[1].
+The database was created using the Google image search API that matched a set of 184 emotion-related keywords to 
+capture the six basic expressions as well as the neutral expression. Images were resized to 48x48 pixels and 
+converted to grayscale. Human labelers were used to reject incorrectly labeled images and filter out some duplicate images.
+The resulting database contains 35,887 images most of which are in the wild settings. The downside of the FER-2013 dataset
+is that the faces are not registered, a small number of images portray disgust (547 images), facial landmark
+detectors fail to extract facial landmarks at this resolution and quality,
+and only the categorical model of affect is provided with FER-2013. Winner of the FER challenge obtained a 71.2% accuracy
+on the test set by using CNNs with linear one-vs-all SVM at the top. 
+</p>
+
+<p>
+The FER-Wild database [2] contains 24,000 images that were obtained by searching emotion-related terms
+from three search engines. The OpenCV face recognition was used to detect faces in the images, and 66 landmark
+points were found. Human labelers were used to annotate the images into six basic expressions and neutral.
+Compared with FER-2013, FER-Wild images have a higher resolution with facial landmark points necessary to
+register the images. Still the downside of this dataset is that few samples express disgust and fear and only
+the categorical model of affect is provided with FER-Wild.An accuracy of 80%  was obtained for the FER-Wild dataset by training 
+using AlexNet.
+</p>
+
+<p>
+AffectNet[3] is a large database containing more than 1M facial images collected from the Internet by querying
+three major search engines using 1250 emotion related keywords in six different languages. Half of the retrieved images
+(~440K) were manually annotated for the presence of seven discrete facial expressions (categorial model) 
+and the intensity of valence and arousal (dimensional model). 
+</p>
+
+
+<hr>
+
+<h2>Results</h2>
+
+<p>
+We started by using the FER-2013 dataset, which consists of 35,887 images that are queried from the web. 
+The data consists of 48x48 pixel grayscale images of faces.
+The faces have been automatically registered so that the face is more or less centered and occupies about the
+same amount of space in each image. The task is to categorize each face based on the emotion shown in the facial expression 
+in to one of seven categories (0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral). 
+The training set consists of 28,709 examples and test set has a size of 3,589 examples. 
+</p>
+
+<p>
+For a first test, a 3 layer convolution neural network was build using Tensorflow as shown below. 
+<center>
+<table class="results">
+<tr>
+	<td><img src="img/cnn.jpg"></img></td>
+</tr>
+<tr>
+<td class="caption">
+	<p>
+		<center>
+			Schema of the Neural Network used for our first test
+		</center>
+	</p>
+</td>
+</tr>
+</table>
+</center>
+</p>
+
+
+<p>
+The 28,709 training examples in the FER-2013 dataset were used to train the convolution neural network and
+from a preliminary setup a 58% accuracy was obtained for the 3,589 test set examples after 3000 iterations. The results for our
+preliminary cnn are shown below.
+
+
+
+<center>
+<table class="results">
+<tr>
+	<td><img src="img/cnn_results.png"></img></td>
+	<td><img src="img/cnn_results_confusion_matrix.png"></img></td>
+</tr>
+</table>
+</center>
+
+
+
+
+</p>
+
+<p>
+The test accuracy could possible be improved by optimizing the convolutional neural network's hyperparameters. 
+We are also planning to implement and test different CNNs architectures such as AlexNet, VGG16, 
+and if time allows ResNet (starting with ResNet50 and extending it it to ResNet152).
+</p>
+<hr>
+    <h2>Experimental Setup</h2>
+    <p>
+        We are using a machine with two Nvidia 1080Ti GPUs and Intel Core i7 CPUs with 4TB of HDD and 1TB of SSD and 64GB of RAM. For the software pack, we are using pure tensorflow Python API as well as Keras API in Python with
+        tensorflow backend. We also will use the Nvidia Tesla P100 and Nvidia Tesla k40 GPUs from SCC cluster that is reserved for the course after finalizing our code. Additionally, we are currently
+        experimenting with OpenFace [8] for face detection and face landmark detection. The image below shows OpenFace demo running in Docker. We also have it in our plan to use the facial action unit (AUs) that reflects the
+        facial muscle movements which is very important in emotion recognition. AUs aim to provide features that are complementary to CNN features [7]. We additionally, plan to add to experiment with LSTM-based RNNs for emotion
+        recognition because the nature of emotion video segment is a temporal sequence.
+		
+		
+		<center>
+		<table class="results">
+		<tr>
+			<td><img src="img/Openface1.png"></img></td>
+			<td><img src="img/Openface2.png"></img></td>
+		</tr>
+		</table>
+		</center>
+
+    </p>
+
+
+
+<hr>
+<p>
+A second approach involved using an SVM fed with Action Units (AU). The Action Units were extracted with OpenFace
+from the datasets FER2013 and Karolinska Directed Emotional Faces (KDEF).
+The KDEF dataset consists of 4900 pictures of 70 individuals each displaying 7 different emotional expressions. Each expressions is
+photographed from 5 different angles. The fact that the debate images have high resolution and that
+the candidates are for most of the time facing the camera under good lighting conditions suggest 
+that a wild dataset is probably not needed to obtain a good emotion prediction accuracy and so a simpler 
+dataset like KDEF could be enough. 
+The AU output of OpenFace consists of a set of occurences and intensities one for each of the AU that OpenFace is
+able to recognize. These AUs are shown below with a brief description. Therefore for each dataset image the AUs were computed and the intensities and occurences 
+values were put in a vector. The SVM training data consisted of a matrix with such vectors. The SVM used is a Support
+Vector Classification (SVC) sklearn with a rbf kernel and ovr decision function. The training and validation data were generated 
+with the function train_test_split in order to have a random sample 
+
+
+
+<table style="width: 100%;" border="1">
+<tbody>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"><strong>Action Unit</strong></td>
+<td style="height: 21px; width: 15%;"><strong>Description</strong></td>
+<td style="height: 21px; width: 31.3582%;"><strong>Facial Muscle</strong></td>
+<td style="height: 21px; width: 38.6418%;"><strong>Example (Hover to Play)</strong></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 1</td>
+<td style="height: 21px; width: 15%;">Inner Brow Raiser</td>
+<td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars medialis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12727" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-FACS.gif" alt="AU1 FACS" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 2</td>
+<td style="height: 21px; width: 15%;">Outer Brow Raiser (unilateral, right side)</td>
+<td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars lateralis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12728" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-right-only.gif" alt="AU2 right only FACS" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 4</td>
+<td style="height: 21px; width: 15%;">Brow Lowerer</td>
+<td style="height: 21px; width: 31.3582%;"><em>Depressor Glabellae, Depressor Supercilli, Currugator</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 5</td>
+<td style="height: 21px; width: 15%;">Upper Lid Raiser</td>
+<td style="height: 21px; width: 31.3582%;"><em>Levator palpebrae superioris</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12729" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5.gif" alt="AU5 FACS" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 6</td>
+<td style="height: 21px; width: 15%;">Cheek Raiser</td>
+<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars orbitalis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12383" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 7</td>
+<td style="height: 21px; width: 15%;">Lid Tightener</td>
+<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars palpebralis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 9 (also shows slight AU4 and AU10)</td>
+<td style="height: 21px; width: 15%;">Nose Wrinkler</td>
+<td style="height: 21px; width: 31.3582%;"> <em>Levator labii superioris alaquae nasi</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12730" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-with-410.gif" alt="AU9 with 4+10" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 10 (also shows slight AU25)</td>
+<td style="height: 21px; width: 15%;">Upper Lip Raiser</td>
+<td style="height: 21px; width: 31.3582%;"><em> Levator Labii Superioris, Caput infraorbitalis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12731" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU10-with-25.gif" alt=" AU10 with 25" width="300" height="100" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 12</td>
+<td style="height: 21px; width: 15%;">Lip Corner Puller</td>
+<td style="height: 21px; width: 31.3582%;"><em>Zygomatic Major</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12733" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12.gif" alt="AU12" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 14</td>
+<td style="height: 21px; width: 15%;">Dimpler</td>
+<td style="height: 21px; width: 31.3582%;"><em>Buccinator</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 15</td>
+<td style="height: 21px; width: 15%;">Lip Corner Depressor</td>
+<td style="height: 21px; width: 31.3582%;"><em>Depressor anguli oris (Triangularis)</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12734" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15.gif" alt="AU15 FACS" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 17</td>
+<td style="height: 21px; width: 15%;">Chin Raiser</td>
+<td style="height: 21px; width: 31.3582%;"><em>Mentalis</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12736" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU17.gif" alt="AU17 FACS guide" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 20</td>
+<td style="height: 21px; width: 15%;">Lip stretcher</td>
+<td style="height: 21px; width: 31.3582%;"><em>Risorius </em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 23</td>
+<td style="height: 21px; width: 15%;">Lip Tightener</td>
+<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150"  /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 25</td>
+<td style="height: 21px; width: 15%;">Lips part</td>
+<td style="height: 21px; width: 31.3582%;"><em>Depressor Labii, Relaxation of Mentalis (AU17), Orbicularis Oris</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12399" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU25-lips-part.gif" alt="AU25 lips part" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 26</td>
+<td style="height: 21px; width: 15%;">Jaw Drop</td>
+<td style="height: 21px; width: 31.3582%;"><em>Masetter; Temporal and Internal Pterygoid </em>relaxed</td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12740" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-with-25.gif" alt="AU26 with 25 FACS affectiva" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 28</td>
+<td style="height: 21px; width: 15%;">Lip Suck</td>
+<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12741" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU28-with-26.gif" alt="AU28 with 26 FACS affectiva" width="300" height="150" /></td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 10%;"> 45</td>
+<td style="height: 21px; width: 15%;">Blink</td>
+<td style="height: 21px; width: 31.3582%;">Relaxation of <em>Levator Palpebrae and Contraction of Orbicularis Oculi, Pars Palpebralis.</em></td>
+<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12407" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU45-blink.gif" alt=" AU45 blink" width="300" height="150"  /></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>References</h2>
+<ol>
+<li>I. J. Goodfellow, D. Erhan, P. L. Carrier, A. Courville, M. Mirza, B. Hamner, W. Cukierski, Y. Tang, D. Thaler, D.-H. Lee et al.,
+    <b>Challenges in representation learning: A report on three machine learning contests</b>, Neural Networks, vol. 64, pp. 59–63, 2015.</li>
+
+<li>A. Mollahosseini, B. Hasani, M. J. Salvador, H. Abdollahi, D. Chan, and M. H. Mahoor, <b>Facial expression recognition from
+world wild web</b>,in The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2016.
+</li>
+
+<li>Ali Mollahosseini, Behzad Hasani, and Mohammad H. Mahoor, <b>AffectNet: A New Database for Facial Expression, Valence,
+    and Arousal Computation in the Wild</b>, IEEE Transactions on Affective Computing, 2017.
+</li>
+    <li>P. Ekman and W. V. Friesen, <b>Constants across cultures in the face and emotion.</b> Journal of personality and
+social psychology,vol. 17, no. 2, p. 124, 1971.
+    </li>
+    <li>J. A. Russell, <b>A circumplex model of affect,</b> Journal of Personality and Social Psychology,
+ vol. 39, no. 6, pp. 1161–1178, 1980.
+    </li>
+    <li>P. Ekman and W. V. Friesen, <b>Facial action coding system</b>, 1977.</li>
+
+    <li>
+        The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge.
+    </li>
+    <li>
+        OpenFace, https://github.com/cmusatyalab/openface
+    </li>
+	<li>
+        KDEF, http://www.emotionlab.se/resources/kdef
+    </li>
+</ol>
+</div>
+</body>
+
+
+
+</html>
