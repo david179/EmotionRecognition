@@ -274,7 +274,9 @@ and if time allows ResNet (starting with ResNet50 and extending it it to ResNet1
 <hr>
 <h3>SVM</h3>
 <p>
-A second approach involved using a SVM fed with Action Units (AU). The Action Units were extracted with OpenFace
+
+A second approach involved using a SVM fed with Action Units (AU). The Action Units were extracted with
+ <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>
 from the datasets FER2013 and Karolinska Directed Emotional Faces (KDEF).
 The KDEF dataset consists of 4900 pictures of 70 individuals each displaying 7 different emotional expressions. Each expressions is
 photographed from 5 different angles. The fact that the debate images have high resolution and that
@@ -282,23 +284,28 @@ the candidates are for most of the time facing the camera under good lighting co
 that a wild dataset is probably not needed to obtain a good emotion prediction accuracy and so a simpler 
 dataset like KDEF could be enough. 
 The AU output of OpenFace consists of a set of occurences and intensities one for each of the AU that OpenFace is
-able to recognize. These AUs are shown below with a brief description. For some images given the position of the face of the person it
+able to recognize. These AUs are shown in the table below with a brief description. For some images given the position of the face of the person it
  was not possible to calculate the AUs. This happened usually on side pictures
 where OpenFace was not able to recognize the face. This reduced even more the size of the dataset which in the end was 3022 images.
- Therefore for each dataset image the AUs were computed and the intensities and occurences 
+The same problem occured with the FER2013 dataset for which it was possible to generate only 5200 images. 
+The reason about this is that the small size of the images 48x48 made it more difficult for OpenFace to 
+generate the AUs and when this was not possible no output file was created.
+ For each dataset image the AUs were computed and the intensities and occurences 
 values were put in a vector. The SVM training data consisted of a matrix with such vectors. The SVM used is a Support
-Vector Classification (SVC) sklearn with a rbf kernel and ovr decision function. The training and validation data were generated 
+Vector Classification (SVC) from sklearn with a rbf kernel and ovr decision function. The training and validation data were generated 
 with the function train_test_split in order to have a random sample.
-	
+</p>
+<p>
 
-
+<br>
+<br>
 <table style="width: 100%;" border="1">
 <tbody>
 <tr style="height: 21px;">
 <td style="height: 21px; width: 10%;"><strong>Action Unit</strong></td>
 <td style="height: 21px; width: 15%;"><strong>Description</strong></td>
 <td style="height: 21px; width: 31.3582%;"><strong>Facial Muscle</strong></td>
-<td style="height: 21px; width: 38.6418%;"><strong>Example (Hover to Play)</strong></td>
+<td style="height: 21px; width: 38.6418%;"><strong>Example</strong></td>
 </tr>
 <tr style="height: 21px;">
 <td style="height: 21px; width: 10%;"> 1</td>
@@ -410,7 +417,13 @@ with the function train_test_split in order to have a random sample.
 </tr>
 </tbody>
 </table>
+</p>
 
+<p>
+Each emotion can be associated to a set of AUs. Some examples are given in the table below. 
+</p>
+<p>
+<br>
 <br>
 <table style="width: 100%;" border="1">
 <tbody>
@@ -482,6 +495,232 @@ with the function train_test_split in order to have a random sample.
 </tr>
 </tbody>
 </table>
+</p>
+
+<h2>Results</h2>
+<p>
+<h3>FER2013 SVM</h3>
+The sklearn function train_test_split has been used to generate the training and validation dataset from the 5200 images of the
+FER2013 dataset for which it was possible to calculate the AUs. The validation dataset comprised 15% of the total images.
+The code was run with 10000 epochs and it gave a validation accuracy of 45.3 % and a f1 score of 0.4218. The output model
+was then used to predict on the images from the debate. The video below is a collection of frames where the emotion has
+been predicted by the SVM. 
+
+</p>
+
+<p>
+<h1>Insert video with frames and their prediction</h1>
+</p>
+
+<p>
+<h3>KDEF SVM</h3>
+The sklearn function train_test_split has been used to generate the training and validation dataset from the 3022 images of the
+KDEF dataset for which it was possible to calculate the AUs. The validation dataset comprised 15% of the total images.
+The code was run with 10000 epochs and it gave a validation accuracy of 67.4 % and a f1 score of 0.6709. The output model
+was then used to predict on the images from the debate. The video below is a collection of frames where the emotion has
+been predicted by the SVM. It can be seen that the predictions are accurate and only in a few cases they seem to be wrong. 
+
+</p>
+
+
+<p>
+<h1>Insert video with frames and their prediction</h1>
+</p>
+
+<h2>Comparison</h2>
+<p>
+One every four frames was extracted from each input video and for each of them the SVM models
+were used to predict the emotion in that frame. 
+The following tables illustrate the predictions obtained over a sample of 1372 frames from the debate. 
+
+</p>
+<table width=50%  style="center; align=center"> 
+  <tr> 
+    <td valign="top">
+<p>
+Trump
+</p>
+<table>
+<tbody>
+<tr>
+<td>Emotion</td>
+<td>FER2013</td>
+<td>KDEF</td>
+</tr>
+<tr>
+<td>Angry</td>
+<td>6.9%</td>
+<td>21.7%</td>
+</tr>
+<tr>
+<td>Afraid</td>
+<td>0.65%</td>
+<td>4.46%</td>
+</tr>
+<tr>
+<td>Disgusted</td>
+<td>0%</td>
+<td>0.07%</td>
+</tr>
+<tr>
+<td>Happy</td>
+<td>1.45%</td>
+<td>0.72%</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td>50.69%</td>
+<td>51.56%</td>
+</tr>
+<tr>
+<td>Sad</td>
+<td>37.58%</td>
+<td>8.74%</td>
+</tr>
+<tr>
+<td>Surprised</td>
+<td>2.69%</td>
+<td>12.81%</td>
+</tr>
+</tbody>
+</table>
+    </td>
+    <td valign="top">
+<p>
+Hilary
+</p>
+<table>
+<tbody>
+<tr>
+<td>Emotion</td>
+<td>FER2013</td>
+<td>KDEF</td>
+</tr>
+<tr>
+<td>Angry</td>
+<td>0.72%</td>
+<td>0.36%</td>
+</tr>
+<tr>
+<td>Afraid</td>
+<td>2.62%</td>
+<td>14.14%</td>
+</tr>
+<tr>
+<td>Disgusted</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Happy</td>
+<td>7.65%</td>
+<td>4.81%</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td>60.05%</td>
+<td>50.80%</td>
+</tr>
+<tr>
+<td>Sad</td>
+<td>27.55%</td>
+<td>0.94%</td>
+</tr>
+<tr>
+<td>Surprised</td>
+<td>2.0%</td>
+<td>28.93%</td>
+</tr>
+</tbody>
+</table>
+    </td>
+  </tr>
+</table>
+
+<p> 
+The predictions highlight the differences and similarities between the two models. In particular,
+for Trump the biggest disagrement was between sad and angry. The FER model in fact interpreted most 
+of the non neutral expressions as sad while the KDEF as angry. A few of such frames are shown below.
+
+
+<h3>FER2013</h3>
+<table>
+<tbody>
+<tr>
+<td><img src="img/image22_fer.jpg"></td>
+<td><img src="img/image58_fer.jpg"></td>
+<td><img src="img/image1222_fer.jpg"></td>
+</tr>
+</tbody>
+</table>
+    
+	
+<h3>KDEF</h3>
+<table>
+<tbody>
+<tr>
+<td><img src="img/image22_kdfe.jpg"></td>
+<td><img src="img/image58_kdfe.jpg"></td>
+<td><img src="img/image1222_kdfe.jpg"></td>
+</tr>
+</tbody>
+</table>
+
+
+In this specific examples Trump's face seem to be more angry than sad and the results are consistent also in the 
+other frames. The KDEF model therefore seems to be more accurante.
+
+The two models on the other hand agree on the neutral expression and 
+seem to recognize them very accurately. Some examples are provided below.
+
+<h3>Frames both models predicted as neutral</h3>
+<table>
+<tbody>
+<tr>
+<td><img src="img/image261.jpg"></td>
+<td><img src="img/image318.jpg"></td>
+<td><img src="img/image417.jpg"></td>
+</tr>
+</tbody>
+</table>
+
+Another important difference is in the surprised emotion. A sample of such pictures is given for
+both models.
+<h3>FER2013</h3>
+<table>
+<tbody>
+<tr>
+<td><img src="img/image252_fer.jpg"></td>
+<td><img src="img/image894_fer.jpg"></td>
+<td><img src="img/image1091_fer.jpg"></td>
+</tr>
+</tbody>
+</table>
+    
+	
+<h3>KDEF</h3>
+<table>
+<tbody>
+<tr>
+<td><img src="img/image945_kdfe.jpg"></td>
+<td><img src="img/image949_kdfe.jpg"></td>
+<td><img src="img/image1163_kdfe.jpg"></td>
+</tr>
+</tbody>
+</table>
+Looking at the pictures it is possible to see that FER2013 is more accurate. 
+Even though Trump's expression in that debate moment may be just a consequence of his way of talking 
+the pictures do portray a surprised expression which the FER2013 model is able to recognize. KDEF instead
+performs poorly and predicts surprised even for two pictures that are quite different from each other.
+This suggests that the model did not have enough training data for this emotion. A larger dataset would 
+probably solve this problem. 
+For Trump's emotions the results suggest that none of the two models is perfect. Better results
+could be achieved by merging the two datasets. 
+For the surprised emotion it would be better to use only the 
+images provided by FER2013 while for angry only the images of KDEF.
+</p>
+
+
 
 
 <h2>References</h2>

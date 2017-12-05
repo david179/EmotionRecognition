@@ -49,14 +49,9 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             print('Surprise: {}'.format(label_kdfe[label_kdfe == 5].shape[0]))
             print('Neutral: {}'.format(label_kdfe[label_kdfe == 6].shape[0]))
             
-            X_train, X_test, y_train, y_test = train_test_split(total_kdfe,label_kdfe,test_size=0.15,random_state=32)
+            train_data, val_data, train_label, val_label = train_test_split(total_kdfe,label_kdfe,test_size=0.15,random_state=32)
             
-            train_data = X_train
-            train_label = y_train
-            
-            val_data = X_test
-            val_label = y_test
-               
+          
         
             # Training phase
             print ("building model")
@@ -168,13 +163,14 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             if label_path == "":
                 predicted_Y = model.predict(val)
                 index = 0
-                cv2.namedWindow('image',cv2.WINDOW_NORMAL)
+                #cv2.namedWindow('image',cv2.WINDOW_NORMAL)
                 for i in predicted_Y:
                     counter[i] = counter[i]+1
                     image = cv2.imread('predict_images/{}'.format(image_names[index]),1)
                     cv2.putText(image,em[i],(10,25),cv2.FONT_ITALIC,1,(0,0,255),3) 
-                    cv2.imshow('image',image)
-                    cv2.waitKey(0)
+                    #cv2.imshow('image',image)
+                    #cv2.waitKey(0)
+                    cv2.imwrite('images_with_prediction/image{}.jpg'.format(index),image)
                     index += 1
                     print(em[i])
                 

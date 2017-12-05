@@ -8,6 +8,9 @@ from os.path import isfile, join
 import _pickle as cPickle
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import f1_score
 import cv2
 
 
@@ -34,19 +37,7 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             print('labels')
             print(label_fer.shape)
            
-            # create train and validation data
-            i_fer_train = i_fer[1500:]
-            i_fer_val = i_fer[0:1500]
             
-            o_fer_train = o_fer[1500:]
-            o_fer_val = o_fer[0:1500]
-            
-            total_fer_train = total_fer[1500:]
-            total_fer_val = total_fer[0:1500]
-            
-            label_fer_train = label_fer[1500:]
-            label_fer_val = label_fer[0:1500]
-           
             
             print('\nImages per emotion')
             print('Angry: {}'.format(label_fer[label_fer == 0].shape[0]))
@@ -57,12 +48,9 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             print('Surprise: {}'.format(label_fer[label_fer == 5].shape[0]))
             print('Neutral: {}'.format(label_fer[label_fer == 6].shape[0]))
             
+            train_data, val_data, train_label, val_label = train_test_split(total_fer,label_fer,test_size=0.15,random_state=32)
             
-            train_data = total_fer_train
-            train_label = label_fer_train
-            
-            val_data = total_fer_val
-            val_label = label_fer_val
+        
                
         
             # Training phase
@@ -170,17 +158,29 @@ def train(epochs=10000, random_state=0,kernel='rbf', decision_function='ovr', tr
             
             em = dict([(0,'Angry'),(2,'Afraid/Fear'),(1,'Disgusted'),(3,'Happy'),(6,'Neutral'),(4,'Sad'),(5,'Surprised')])
             
+            counter = dict([(0,0),(2,0),(1,0),(3,0),(6,0),(4,0),(5,0)])
             
             if label_path == "":
                 predicted_Y = model.predict(val)
                 index = 0
+                #cv2.namedWindow('image',cv2.WINDOW_NORMAL)
                 for i in predicted_Y:
+                    counter[i] = counter[i]+1
                     image = cv2.imread('predict_images/{}'.format(image_names[index]),1)
-                    cv2.putText(image,em[i],(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255)) 
-                    cv2.imshow('o',image)
-                    cv2.waitKey(0)
+                    cv2.putText(image,em[i],(10,25),cv2.FONT_ITALIC,1,(0,0,255),3) 
+                    #cv2.imshow('o',image)
+                    #cv2.waitKey(0)
+                    cv2.imwrite('images_with_prediction/image{}.jpg'.format(index),image)
                     index += 1
                     print(em[i])
+                
+                print('Angry: {}'.format(counter[0]/index))
+                print('Afraid: {}'.format(counter[2]/index))
+                print('Disgusted: {}'.format(counter[1]/index))
+                print('Happy: {}'.format(counter[3]/index))
+                print('Neutral: {}'.format(counter[6]/index))
+                print('Sad: {}'.format(counter[4]/index))
+                print('Surprised: {}'.format(counter[5]/index))
                 
             else:
                 print('loading lables from: {}'.format(label_path))
@@ -194,6 +194,13 @@ def evaluate(model, X, Y):
 
         predicted_Y = model.predict(X)
         accuracy = accuracy_score(Y, predicted_Y)
+        
+        f1 = f1_score(Y,predicted_Y,average='weighted')
+        
+        print(accuracy)
+        print('f1')
+        print(f1)
+        
         return accuracy
 
 # parse arg to see if we need to launch training now or not yet
@@ -204,7 +211,7 @@ parser.add_argument("-l", "--labels", default="", help="path to emotion labels o
 args = parser.parse_args()
 if args.train=="yes" or args.train=="Yes" or args.train=="YES":
     train()
-if (args.evaluate=="yes" or args.evaluate=="Yes" or args.evaluate=="YES") and args.labels =="":
+elif (args.evaluate=="yes" or args.evaluate=="Yes" or args.evaluate=="YES") and args.labels =="":
     train(train_model=False)
 else:
     train(train_model=False,label_path=args.labels)
