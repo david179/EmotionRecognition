@@ -48,8 +48,10 @@ width="119" height="120"></a>
  Davide Lucchi <br>
  Mona Jalal<br>
  Silvia Ionescu<br>
- 12/3/2017 
+ 12/7/2017
 </p>
+
+<hr>
 
 <p class="main-body">
 
@@ -159,14 +161,14 @@ setting that FER systems have be applied to.
 </p>
 
 <p>
-The Facial Expression Recognition 2013 (FER-2013) datatset was introduced in the ICML 2013 challenge[1].
+The Facial Expression Recognition 2013 (FER-2013) datatset was introduced in the ICML 2013 challenge [11].
 The database was created using the Google image search API that matched a set of 184 emotion-related keywords to 
-capture the six basic expressions as well as the neutral expression. Images were resized to 48x48 pixels and 
+capture the six basic expressions as well as the neutral expression. Images were resized to 48x48 pixels and
 converted to grayscale. Human labelers were used to reject incorrectly labeled images and filter out some duplicate images.
-The resulting database contains 35,887 images most of which are in the wild settings. The downside of the FER-2013 dataset
-is that the faces are not registered, a small number of images portray disgust (547 images), facial landmark
-detectors fail to extract facial landmarks at this resolution and quality,
-and only the categorical model of affect is provided with FER-2013. Winner of the FER challenge obtained a 71.2% accuracy
+The resulting database contains 35,887 images most of which are in the wild settings (collected from all over the Web).
+    The downside of the FER-2013 dataset
+is that the faces are not registered, and only a small number of images portray disgust (547 images) hence the emotion distribution is not close to uniform, facial landmark
+detectors fail to extract facial landmarks at this resolution and quality. Winner of the FER challenge obtained a 71.2% accuracy
 on the test set by using CNNs with linear one-vs-all SVM at the top. 
 </p>
 
@@ -721,37 +723,60 @@ images provided by FER2013 while for angry only the images of KDEF.
 </p>
 
 
+<h3>Dlib</h3>
+We are using Dlib Python library which is very prevalently used in aligning faces as well as extracting 68 landmarks for the face. Additionally, the OpenFace
+software that we are using is making use of Dlib.
+
 
 
 <h2>References</h2>
 <ol>
-<li>I. J. Goodfellow, D. Erhan, P. L. Carrier, A. Courville, M. Mirza, B. Hamner, W. Cukierski, Y. Tang, D. Thaler, D.-H. Lee et al.,
-    <b>Challenges in representation learning: A report on three machine learning contests</b>, Neural Networks, vol. 64, pp. 59–63, 2015.</li>
+    <!-- silvia please have a look at first reference! -->
+<li>I. J. Goodfellow, D. Erhan, P. L. Carrier, A. Courville, M. Mirza, B. Hamner, W. Cukierski, Y. Tang, D. Thaler, and D.H. Lee,
+    <b>Challenges in Representation Learning: A Report on Three Machine Learning Contests</b>, Neural Networks, vol. 64, pp. 59–63, 2015.</li>
 
-<li>A. Mollahosseini, B. Hasani, M. J. Salvador, H. Abdollahi, D. Chan, and M. H. Mahoor, <b>Facial expression recognition from
-world wild web</b>,in The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2016.
+<li>A. Mollahosseini, B. Hasani, M. J. Salvador, H. Abdollahi, D. Chan, and M. H. Mahoor, <b>Facial Expression Recognition from
+World Wild Web</b>,in The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2016.
 </li>
 
-<li>Ali Mollahosseini, Behzad Hasani, and Mohammad H. Mahoor, <b>AffectNet: A New Database for Facial Expression, Valence,
+<li>A. Mollahosseini, B. Hasani, and M. H. Mahoor, <b>AffectNet: A New Database for Facial Expression, Valence,
     and Arousal Computation in the Wild</b>, IEEE Transactions on Affective Computing, 2017.
 </li>
-    <li>P. Ekman and W. V. Friesen, <b>Constants across cultures in the face and emotion.</b> Journal of personality and
+    <li>P. Ekman, and W. V. Friesen, <b>Constants across Cultures in the Face and Emotion.</b> Journal of personality and
 social psychology,vol. 17, no. 2, p. 124, 1971.
     </li>
-    <li>J. A. Russell, <b>A circumplex model of affect,</b> Journal of Personality and Social Psychology,
+    <li>J. A. Russell, <b>A Circumplex Model of Affect</b>, Journal of Personality and Social Psychology,
  vol. 39, no. 6, pp. 1161–1178, 1980.
     </li>
-    <li>P. Ekman and W. V. Friesen, <b>Facial action coding system</b>, 1977.</li>
+    <li>P. Ekman and W. V. Friesen, <b>Facial Action Coding System</b>, 1977.</li>
 
     <li>
-        The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge.
+        J. Deng, N. Cummins, J. Han, X. Xu, Z. Ren, V. Pandit, Z. Zhang, and B. Schuller, <b>The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge</b>, in Chinese Conference on Pattern Recognition. Singapore, SGP: Springer, 2016, pp. 652–666.
     </li>
     <li>
-        OpenFace, https://github.com/cmusatyalab/openface
+        T. Baltrušaitis, P. Robinson, and L. P. Morency, <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>: An Open Source Facial Behavior Analysis Toolkit. in IEEE Winter Conference on Applications of Computer Vision, 2016.
     </li>
 	<li>
-        KDEF, http://www.emotionlab.se/resources/kdef
+        D. Lundqvist, A. Flykt, and A. Öhman, <b>The Karolinska Directed Emotional Faces - <a href="http://www.emotionlab.se/resources/kdef">KDEF</a></b>, CD-ROM from Department of Clinical Neuroscience, Psychology section, Karolinska Institutet, ISBN 91-630-7164-9, 1998.
     </li>
+
+    <li>
+        Y. Tang, Deep Learning using Linear Support Vector Machines, CoRR abs/1306.0239 (2013).
+    </li>
+
+    <li>
+        <b>Kaggle FER2013 Challenge</b>, <a href="https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data">https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data</a>, 2013.
+    </li>
+    <li>
+        <b>Dlib Shape Predictor Model</b>, <a href="http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2">http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2</a>
+    </li>
+    <li>
+        <b>SVM for Facial Expression Recognition</b>, <a href="https://github.com/amineHorseman/facial-expression-recognition-svm">https://github.com/amineHorseman/facial-expression-recognition-svm</a>, 2017.
+    </li>
+    <li>
+        B. Farnsworth, <b>Facial Action Coding System (FACS), A Visual Guidebook</b> <a href ="https://imotions.com/blog/facial-action-coding-system/">https://imotions.com/blog/facial-action-coding-system/</a> , 2016.
+    </li>
+
 </ol>
 </div>
 </body>
