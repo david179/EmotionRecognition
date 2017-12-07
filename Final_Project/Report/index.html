@@ -55,7 +55,7 @@ width="119" height="120"></a>
 
 <p class="main-body">
 
-<h2> Project Problem Definition </h2>
+<h3> Project Problem Definition </h3>
 <p>
 Given the video of a person classify the emotion that their face is showing in each frame. 
 The algorithm will be applied to the videos of the 2016 presidential debate between Hillary Clinton and Donald
@@ -106,7 +106,7 @@ neutral, happy, sad, surprise, fear, disgust and anger.
 
 
 
-<h2>Input data</h2>
+<h3>Input data</h3>
 <p>Hillary Clinton and Donald Trump's Presidential Debate on October 19th, 2016
     <br>
      This dataset is given to us by Professor Margrit Betke's research group. 
@@ -142,14 +142,14 @@ Your browser does not support the video tag.
 <hr>
 
 
-<h2>Desired Results</h2>
+<h3>Desired Results</h3>
 
 <p>
 The output of the algorithm should be a set of scores of the emotion in the candidate's face. 
 This scores represent the probability that the current espression is associated to that
 emotion. The scores are recomputed for each set of frames.
-<center>
-<table class="image">
+
+<table class="image" align="center">
 <tr>
 	<td><img width="200px" src="img/H1.jpg"></td>
 	<td><img width="200px" src="img/H2.jpg"></td>
@@ -162,12 +162,12 @@ emotion. The scores are recomputed for each set of frames.
 </tr>
 
 </table>
-</center>
+
 
 </p>
 
 <hr>
-<h2>Related Work</h2>
+<h3>Related Work</h3>
 
 <p>
 Facial expressions are one of the most important non-verbal ways that human beings convey internal emotion.
@@ -203,7 +203,7 @@ The resulting database contains 35,887 images most of which are in the wild sett
     The downside of the FER-2013 dataset
 is that the faces are not registered, and only a small number of images portray disgust (547 images) hence the emotion distribution is not close to uniform, facial landmark
 detectors fail to extract facial landmarks at this resolution and quality. Winner of the FER challenge obtained a 71.2% accuracy
-on the test set by using CNNs with linear one-vs-all SVM at the top. 
+on the test set by using CNNs with linear one-vs-all SVM classifier at the top.
 </p>
 
 <p>
@@ -305,26 +305,27 @@ and if time allows ResNet (starting with ResNet50 and extending it it to ResNet1
 <hr>
 <h3>SVM</h3>
 <p>
-
-A second approach involved using a SVM fed with Action Units (AU). The Action Units were extracted with
+    For this part we started with a baseline SVM code that detects emotion based on 68 facial landmarks.
+We tweaked this SVM and fed the facial action units to it. The Action Units were extracted with
  <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>
 from the datasets FER2013 and Karolinska Directed Emotional Faces (KDEF).
 The KDEF dataset consists of 4900 pictures of 70 individuals each displaying 7 different emotional expressions. Each expressions is
 photographed from 5 different angles. The fact that the debate images have high resolution and that
 the candidates are for most of the time facing the camera under good lighting conditions suggest 
-that a wild dataset is probably not needed to obtain a good emotion prediction accuracy and so a simpler 
-dataset like KDEF could be enough. 
+that a wild dataset is probably not needed to obtain a good emotion prediction accuracy and a simpler
+dataset like KDEF could be helpful enough.
 The AU output of OpenFace consists of a set of occurences and intensities one for each of the AU that OpenFace is
-able to recognize. These AUs are shown in the table below with a brief description. For some images given the position of the face of the person it
+able to recognize. You can refer to the Appendix section for an elaborate visualization of AUs and their
+    relation to emotions. For some of the images given the position of person's face, it
  was not possible to calculate the AUs. This happened usually on side pictures
 where OpenFace was not able to recognize the face. This reduced even more the size of the dataset which in the end was 3022 images.
-The same problem occured with the FER2013 dataset for which it was possible to generate only 5200 images. 
-The reason about this is that the small size of the images 48x48 made it more difficult for OpenFace to 
-generate the AUs and when this was not possible no output file was created.
+The same problem occurred with the FER2013 dataset for which it was possible to generate only 5200 images.
+The reason about this is that the low-resolution of small size (48x48 pixels) images made it more difficult for OpenFace to
+generate the AUs and when this was not possible, no output file was created.
  For each dataset image the AUs were computed and the intensities and occurences 
 values were put in a vector. The SVM training data consisted of a matrix with such vectors. The SVM used is a Support
-Vector Classification (SVC) from sklearn with a rbf kernel and ovr decision function. The training and validation data were generated 
-with the function train_test_split in order to have a random sample.
+Vector Classification (SVC) from Python sklearn library with a rbf (radial basis function) kernel and ovr (One Vs Rest) classifier. The training and validation data were generated
+with the function train_test_split from sklearn in order to have a random sample.
 </p>
 <p>
 
@@ -335,9 +336,9 @@ with the function train_test_split in order to have a random sample.
 
 </p>
 
-<h2>Results</h2>
+<h3>Results</h3>
 <p>
-<h3>FER2013 SVM</h3>
+<h4>FER2013 SVM</h4>
 The sklearn function train_test_split has been used to generate the training and validation dataset from the 5200 images of the
 FER2013 dataset for which it was possible to calculate the AUs. The validation dataset comprised 15% of the total images.
 The code was run with 10000 epochs and it gave a validation accuracy of 45.3 % and a f1 score of 0.4218. The output model
@@ -351,7 +352,7 @@ been predicted by the SVM.
 </p>
 
 <p>
-<h3>KDEF SVM</h3>
+<h4>KDEF SVM</h4>
 The sklearn function train_test_split has been used to generate the training and validation dataset from the 3022 images of the
 KDEF dataset for which it was possible to calculate the AUs. The validation dataset comprised 15% of the total images.
 The code was run with 10000 epochs and it gave a validation accuracy of 67.4 % and a f1 score of 0.6709. The output model
@@ -365,7 +366,7 @@ been predicted by the SVM. It can be seen that the predictions are accurate and 
 <h1>Insert video with frames and their prediction</h1>
 </p>
 
-<h2>Comparison</h2>
+<h4>Comparison</h4>
 <p>
 One every four frames was extracted from each input video and for each of them the SVM models
 were used to predict the emotion in that frame. 
@@ -481,7 +482,7 @@ for Trump the biggest disagreement was between sad and angry. The FER model in f
 of the non neutral expressions as sad while the KDEF as angry. A few of such frames are shown below.
 
 
-<h3>FER2013</h3>
+<h4>FER2013</h4>
 <table align="center">
 <tbody>
 <tr>
@@ -493,7 +494,7 @@ of the non neutral expressions as sad while the KDEF as angry. A few of such fra
 </table>
     
 	
-<h3>KDEF</h3>
+<h4>KDEF</h4>
 <table align="center">
 <tbody>
 <tr>
@@ -511,7 +512,7 @@ other frames. The KDEF model therefore seems to be more accurante.
 The two models on the other hand agree on the neutral expression and 
 seem to recognize them very accurately. Some examples are provided below.
 
-<h3>Frames both models predicted as neutral</h3>
+<h4>Frames both models predicted as neutral</h4>
 <table align="center">
 <tbody>
 <tr>
@@ -524,7 +525,7 @@ seem to recognize them very accurately. Some examples are provided below.
 
 Another important difference is in the surprised emotion. A sample of such pictures is given for
 both models.
-<h3>FER2013</h3>
+<h4>FER2013</h4>
 <table align="center">
 <tbody>
 <tr>
@@ -536,7 +537,7 @@ both models.
 </table>
     
 	
-<h3>KDEF</h3>
+<h4>KDEF</h4>
 <table align="center">
 <tbody>
 <tr>
@@ -569,7 +570,7 @@ software that we are using is making use of Dlib.
 <h3>Future Works</h3>
 In what follows, we suggest some future works some of which we had in our initial plan but we didn't get the chance to do
 those experiments due to the time constraints of the project. Some of the other suggestions are based on the experiments we
-did and came across the idea of using or took them away from the paper we studied and during our brain-storming sessions, decided
+did and came across the idea of using or took them away from the papers we studied and during our brain-storming sessions, decided
 they would be a great fit for our project.
 <ul>
     <li>
@@ -595,6 +596,13 @@ they would be a great fit for our project.
     </li>
     <li>
         Checking to see if our algorithms would be able to detect emotions in group-level as for EmotiW 5.0 challenge.
+    </li>
+    <li>
+        Using YOLO v2 for the face detection phase as it is more accurate compared to OpenFace. Also, YOLO v2 could be used
+        for real-time face detection which can help in creating a real-time emotion detector.
+    </li>
+    <li>
+        Experimenting with different kernel functions in the SVM like Gaussian or polynomial kernels besides RBF.
     </li>
 </ul>
 
