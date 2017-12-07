@@ -66,30 +66,39 @@ neutral, happy, sad, surprise, fear, disgust and anger.
 <p>
     Emotion recognition has many applications like smart home automation, self-driving cars,
     improving the classroom dynamics based on the students' emotions, and helping people with disabilities based on their perceived affections. Emotion/expression
-    recognition is studied under affective computing as a way for the human-computer interaction (<b>HCI</b>) as well as human-robot interaction (<b>HRI</b>).
+    recognition is studied under the umbrella of affective computing as a way for the human-computer interaction (<b>HCI</b>) as well as human-robot interaction (<b>HRI</b>).
     Emotion recognition is one of the harder tasks in computer vision tasks spectrum with respect to achieved accuracy.
     The problem of emotion/expression recognition would be even harder when studied in other modalities like face sketches, face caricature and/or
-    when special filters are applied that has deformed/malformed the face in a way that detectable by a human and by not probably a computer.
+    when special filters are applied that has deformed/malformed the face in a way detectable by a human and not probably a computer.
     Most of the efforts in the emotion recognition literature has been performed in normal human faces and only for a very few (7) emotions.
     Additionally, most of the research in the community has been geared towards winning the challenges for emotion recognition like
-    EmotiW (Emotion Recognition in the Wild Challenge), DCER&HPE (Joint Challenge on Dominant and Complementary Emotion
-    Recognition Using Micro Emotion Features and Head-Pose Estimation), FERA (Facial Expression Recognition and Analysis Challenge), MEC (
-    Multimodal Emotion Recognition Challenge), EmotiW 5.0, and AVEC (Audio/Visual Emotion Challenge).
-
+    EmotiW (Emotion Recognition in the Wild Challenge), DCER and HPE (Joint Challenge on Dominant and Complementary Emotion
+    Recognition Using Micro-Emotion Features and Head-Pose Estimation), FERA (Facial Expression Recognition and Analysis Challenge), MEC (
+    Multimodal Emotion Recognition Challenge), EmotiW 5.0, and AVEC (Audio/Visual Emotion Challenge). All these challenges come up with their own dataset. Additional
+    famous datasets for emotion recognition are FER2013, CK+, MMI facial expression database, KDEF and AffectNet. In this project, we worked with FER2013, KDEF and
+    AffectNet datasets.
+    Overall, what makes a good dataset depends on various factors like having exposure to colored images of various age groups, ethnicity groups, and genders besides
+    having cleaned and organized labels. Indeed one of the datasets that we came across (EmotionNet) which included the Facial Action Units encoding for each image,
+    was very hard to work with and needed substantial data cleaning time compared to the other three datasets we worked with. We would additionally like to bring
+    the attention of those who make datasets available to researcher to how easy-to-access datasets need to be. We had quite our share of numerous challenges for
+    retrieving the 120GB AffectNet dataset. Additionally, FER2013, which we assume is the most prevalent dataset in the field, has very low-resolution images many of
+    which include watermark in the images. These watermark potentially can degrade the prediction accuracy of machine learning and deep learning systems.
+</p>
+<p>
     EmotiW challenge goal is to provide a standard platform for emotion recognition.
-    The first EmotiW (2013), brought the attention of researchers to emotion recognition in <b>Acted Facial Expression in the Wild</b>(AFEW). In EmotiW 2015,
-    a new emotion recognition challenge was introduced with the emerge of <b>Static Facial Expression in the Wild</b>(SFEW) database. SFEW database is extracted
+    The first EmotiW (2013), brought the attention of researchers to emotion recognition in <b>Acted Facial Expression in the Wild</b> (AFEW). For example, the EmotiW 2013 winners used a deep neural network (DNN) method for detecting emotions. They used a convolutional neural network (CNN) for face analysis,
+    bag of words method for analysing the mouth area, and use of deep belief networks for audio signal processing.In EmotiW 2015,
+    a new emotion recognition challenge was introduced with the emerge of <b>Static Facial Expression in the Wild</b> (SFEW) database. SFEW database is extracted
     from AFEW database using a fiducial point-based clustering method.
     The EmotiW 2015 highest classification accuracy of 54% for AFEW and 62% for SFEW
     represents the needs for further research that needs to be done by the researchers in the field to improve the accuracy of emotion recognition. Reseachers have tried to
     improve the emotion recognition from various corners including enhancing the accuracy of face and face part detection which plays the most crucial role in emotion
-    recognition, improve the head pose detection, as well as sorting out the problems with varied illumination, noise and lack of labeled data. The last problem has been
-    focus of many recent works in which they have used crowdsourcing in which they ask crowdsource workers to label the face emotions in large amount as done in AffectNet.
+    recognition, improving the head pose detection, as well as sorting out the problems with varied illumination, noise and lack of labeled data. The last problem has been
+    focus of many recent works in which they have used crowdsourcing where they ask crowd-workers to label the face emotions in large amount as done in AffectNet.
     Some of the future meta-data that could be included in the datasets studied by researcher that could improve the accuracy of emotion recognition are as EEG, eye gaze estimation and eye gaze direction,
     and skin galvanic response. Moreover, recent attention has been geared towards group-level emotion recognition as in EmotiW 5.0 challenge in which they try to analyze
     the effect of a group of people in images.
-    The EmotiW 2013 winners used a deep neural network (DNN) method for detecting emotions. They used a convolutional neural network (CNN) for face analysis,
-    bag of words method for analysing the mouth area, and use of deep belief networks for audio signal processing.
+
 
 </p>
 <hr>
@@ -109,10 +118,9 @@ neutral, happy, sad, surprise, fear, disgust and anger.
 <table class="center">
 
 <tr>
-<center>
+
 <td align="center" valign="middle">Donald Trump</td>
 <td align="center" valign="middle">Hilary Clinton</td>
-</center>
 </tr>
 <tr>
 <td>
@@ -254,7 +262,7 @@ The 28,709 training examples in the FER-2013 dataset were used to train the conv
 from a preliminary setup a 58% accuracy was obtained for the 3,589 test set examples after 3000 iterations. The results for our
 preliminary cnn are shown below.
 
-<table class="results">
+<table class="results" align="center">
 <tr>
 	<td><img src="img/cnn_results.png"></td>
 	<td><img src="img/cnn_results_confusion_matrix.png"></td>
@@ -282,7 +290,7 @@ and if time allows ResNet (starting with ResNet50 and extending it it to ResNet1
 		
 		
 
-		<table class="results">
+		<table class="results" align="center">
 		<tr>
 			<td><img src="img/Openface1.png"></td>
 			<td><img src="img/Openface2.png"></td>
@@ -322,202 +330,9 @@ with the function train_test_split in order to have a random sample.
 
 <br>
 <br>
-<table style="width: 100%;" border="1">
-<tbody>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"><strong>Action Unit</strong></td>
-<td style="height: 21px; width: 15%;"><strong>Description</strong></td>
-<td style="height: 21px; width: 31.3582%;"><strong>Facial Muscle</strong></td>
-<td style="height: 21px; width: 38.6418%;"><strong>Example</strong></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 1</td>
-<td style="height: 21px; width: 15%;">Inner Brow Raiser</td>
-<td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars medialis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12727" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-FACS.gif" alt="AU1 FACS" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 2</td>
-<td style="height: 21px; width: 15%;">Outer Brow Raiser (unilateral, right side)</td>
-<td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars lateralis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12728" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-right-only.gif" alt="AU2 right only FACS" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 4</td>
-<td style="height: 21px; width: 15%;">Brow Lowerer</td>
-<td style="height: 21px; width: 31.3582%;"><em>Depressor Glabellae, Depressor Supercilli, Currugator</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 5</td>
-<td style="height: 21px; width: 15%;">Upper Lid Raiser</td>
-<td style="height: 21px; width: 31.3582%;"><em>Levator palpebrae superioris</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12729" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5.gif" alt="AU5 FACS" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 6</td>
-<td style="height: 21px; width: 15%;">Cheek Raiser</td>
-<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars orbitalis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12383" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 7</td>
-<td style="height: 21px; width: 15%;">Lid Tightener</td>
-<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars palpebralis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 9 (also shows slight AU4 and AU10)</td>
-<td style="height: 21px; width: 15%;">Nose Wrinkler</td>
-<td style="height: 21px; width: 31.3582%;"> <em>Levator labii superioris alaquae nasi</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12730" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-with-410.gif" alt="AU9 with 4+10" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 10 (also shows slight AU25)</td>
-<td style="height: 21px; width: 15%;">Upper Lip Raiser</td>
-<td style="height: 21px; width: 31.3582%;"><em> Levator Labii Superioris, Caput infraorbitalis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12731" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU10-with-25.gif" alt=" AU10 with 25" width="300" height="100" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 12</td>
-<td style="height: 21px; width: 15%;">Lip Corner Puller</td>
-<td style="height: 21px; width: 31.3582%;"><em>Zygomatic Major</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12733" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12.gif" alt="AU12" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 14</td>
-<td style="height: 21px; width: 15%;">Dimpler</td>
-<td style="height: 21px; width: 31.3582%;"><em>Buccinator</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 15</td>
-<td style="height: 21px; width: 15%;">Lip Corner Depressor</td>
-<td style="height: 21px; width: 31.3582%;"><em>Depressor anguli oris (Triangularis)</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12734" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15.gif" alt="AU15 FACS" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 17</td>
-<td style="height: 21px; width: 15%;">Chin Raiser</td>
-<td style="height: 21px; width: 31.3582%;"><em>Mentalis</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12736" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU17.gif" alt="AU17 FACS guide" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 20</td>
-<td style="height: 21px; width: 15%;">Lip stretcher</td>
-<td style="height: 21px; width: 31.3582%;"><em>Risorius </em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 23</td>
-<td style="height: 21px; width: 15%;">Lip Tightener</td>
-<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 25</td>
-<td style="height: 21px; width: 15%;">Lips part</td>
-<td style="height: 21px; width: 31.3582%;"><em>Depressor Labii, Relaxation of Mentalis (AU17), Orbicularis Oris</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12399" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU25-lips-part.gif" alt="AU25 lips part" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 26</td>
-<td style="height: 21px; width: 15%;">Jaw Drop</td>
-<td style="height: 21px; width: 31.3582%;"><em>Masetter; Temporal and Internal Pterygoid </em>relaxed</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12740" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-with-25.gif" alt="AU26 with 25 FACS affectiva" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 28</td>
-<td style="height: 21px; width: 15%;">Lip Suck</td>
-<td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12741" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU28-with-26.gif" alt="AU28 with 26 FACS affectiva" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"> 45</td>
-<td style="height: 21px; width: 15%;">Blink</td>
-<td style="height: 21px; width: 31.3582%;">Relaxation of <em>Levator Palpebrae and Contraction of Orbicularis Oculi, Pars Palpebralis.</em></td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12407" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU45-blink.gif" alt=" AU45 blink" width="300" height="150"  /></td>
-</tr>
-</tbody>
-</table>
+
 </p>
 
-<p>
-Each emotion can be associated to a set of AUs. Some examples are given in the table below. 
-</p>
-<p>
-<br>
-<br>
-<table style="width: 100%;" border="1">
-<tbody>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;"><b>Emotion</b></td>
-<td style="height: 21px; width: 15%;"><strong>Action Units</strong></td>
-<td style="height: 21px; width: 31.3582%;"><strong>Description</strong></td>
-<td style="height: 21px; width: 38.6418%;"><strong>Examples (Hover to Play)</strong></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Happiness / Joy</td>
-<td style="height: 21px; width: 15%;">6 + 12</td>
-<td style="height: 21px; width: 31.3582%;">Cheek Raiser, Lip Corner Puller</td>
-<td style="height: 21px; width: 38.6418%;"><img class="size-medium wp-image-12383 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150" /></p>
-<p><img class="size-medium wp-image-12388 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Sadness</td>
-<td style="height: 21px; width: 15%;">1 + 4 + 15</td>
-<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Brow Lowerer, Lip Corner Depressor</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Surprise</td>
-<td style="height: 21px; width: 15%;">1 + 2 + 5 + 26</td>
-<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Upper Lid Raiser, Jaw Drop</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Fear</td>
-<td style="height: 21px; width: 15%;">1 + 2 + 4 + 5 + 7 + 20 + 26</td>
-<td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Stretcher, Jaw Drop</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Anger</td>
-<td style="height: 21px; width: 15%;">4 + 5 + 7 + 23</td>
-<td style="height: 21px; width: 31.3582%;">Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Tightener</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150"/></p>
-<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"/></p>
-<p><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150" /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Disgust</td>
-<td style="height: 21px; width: 15%;">9 + 15 + 16</td>
-<td style="height: 21px; width: 31.3582%;">Nose Wrinkler, Lip Corner Depressor, Lower Lip Depressor</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12385" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-nose-wrinkler.gif" alt="AU9 nose wrinkler" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150"  /></p>
-<p><img class="aligncenter size-medium wp-image-12392" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU16-lower-lip-depressor.gif" alt="AU16 lower lip depressor" width="300" height="150"  /></td>
-</tr>
-<tr style="height: 21px;">
-<td style="height: 21px; width: 10%;">Contempt</td>
-<td style="height: 21px; width: 15%;">12 + 14 (on one side of the face)</td>
-<td style="height: 21px; width: 31.3582%;">Lip Corner Puller, Dimpler</td>
-<td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12388" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150" /></p>
-<p><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150" /></td>
-</tr>
-</tbody>
-</table>
 </p>
 
 <h2>Results</h2>
@@ -670,9 +485,9 @@ of the non neutral expressions as sad while the KDEF as angry. A few of such fra
 <table align="center">
 <tbody>
 <tr>
-<td><img src="img/image22_fer.jpg"></td>
-<td><img src="img/image58_fer.jpg"></td>
-<td><img src="img/image1222_fer.jpg"></td>
+<td><img src="img/image22_fer.jpg" width="200px" height="200px"></td>
+<td><img src="img/image58_fer.jpg" width="200px" height="200px"></td>
+<td><img src="img/image1222_fer.jpg" width="200px" height="200px"></td>
 </tr>
 </tbody>
 </table>
@@ -682,9 +497,9 @@ of the non neutral expressions as sad while the KDEF as angry. A few of such fra
 <table align="center">
 <tbody>
 <tr>
-<td><img src="img/image22_kdfe.jpg"></td>
-<td><img src="img/image58_kdfe.jpg"></td>
-<td><img src="img/image1222_kdfe.jpg"></td>
+<td><img src="img/image22_kdfe.jpg" width="200px" height="200px"></td>
+<td><img src="img/image58_kdfe.jpg" width="200px" height="200px"></td>
+<td><img src="img/image1222_kdfe.jpg" width="200px" height="200px"></td>
 </tr>
 </tbody>
 </table>
@@ -700,9 +515,9 @@ seem to recognize them very accurately. Some examples are provided below.
 <table align="center">
 <tbody>
 <tr>
-<td><img src="img/image261.jpg"></td>
-<td><img src="img/image318.jpg"></td>
-<td><img src="img/image417.jpg"></td>
+<td><img src="img/image261.jpg" width="200px" height="200px"></td>
+<td><img src="img/image318.jpg" width="200px" height="200px"></td>
+<td><img src="img/image417.jpg" width="200px" height="200px"></td>
 </tr>
 </tbody>
 </table>
@@ -713,9 +528,9 @@ both models.
 <table align="center">
 <tbody>
 <tr>
-<td><img src="img/image252_fer.jpg"></td>
-<td><img src="img/image894_fer.jpg"></td>
-<td><img src="img/image1091_fer.jpg"></td>
+<td><img src="img/image252_fer.jpg" width="200px" height="200px"></td>
+<td><img src="img/image894_fer.jpg" width="200px" height="200px"></td>
+<td><img src="img/image1091_fer.jpg" width="200px" height="200px"></td>
 </tr>
 </tbody>
 </table>
@@ -725,9 +540,9 @@ both models.
 <table align="center">
 <tbody>
 <tr>
-<td><img src="img/image945_kdfe.jpg"></td>
-<td><img src="img/image949_kdfe.jpg"></td>
-<td><img src="img/image1163_kdfe.jpg"></td>
+<td><img src="img/image945_kdfe.jpg" width="200px" height="200px"></td>
+<td><img src="img/image949_kdfe.jpg" width="200px" height="200px"></td>
+<td><img src="img/image1163_kdfe.jpg" width="200px" height="200px"></td>
 </tr>
 </tbody>
 </table>
@@ -745,12 +560,47 @@ images provided by FER2013 while for angry only the images of KDEF.
 
 
 <h3>Dlib</h3>
-We are using Dlib Python library which is very prevalently used in aligning faces as well as extracting 68 landmarks for the face. Additionally, the OpenFace
+We are using <b>Dlib</b> Python library which is very prevalently used in aligning faces as well as extracting 68 landmarks for the face. Additionally, the OpenFace
 software that we are using is making use of Dlib.
 
 
+<hr>
 
-<h2>References</h2>
+<h3>Future Works</h3>
+In what follows, we suggest some future works some of which we had in our initial plan but we didn't get the chance to do
+those experiments due to the time constraints of the project. Some of the other suggestions are based on the experiments we
+did and came across the idea of using or took them away from the paper we studied and during our brain-storming sessions, decided
+they would be a great fit for our project.
+<ul>
+    <li>
+        Use of Recurrent Neural Networks (RNNs) for detecting emotions in videos.
+    </li>
+    <li>
+        Multi-modal emotion recognition using both audio and video signals.
+    </li>
+    <li>
+        Use of the state-of-the-art DNN architectures as pre-trained models like ResNet50 or DenseNet121 instead of VGG16
+        to accelerate the task of training.
+    </li>
+    <li>
+        Experimenting with different types of ReLU (like Leaky ReLU) as well as different optimizers (Adam vs. SGD vs. RMSProp)
+    </li>
+    <li>
+        Drawing saliency maps to realize which pixels participate most for various emotions which would help us in debugging
+        misclassification errors.
+    </li>
+    <li>
+        Using AFEW and SFEW datasets which seem more of an standard in the emotion recognition community (We learned about
+        these towards the end of project).
+    </li>
+    <li>
+        Checking to see if our algorithms would be able to detect emotions in group-level as for EmotiW 5.0 challenge.
+    </li>
+</ul>
+
+<hr>
+
+<h3>References</h3>
 <ol>
     <!-- silvia please have a look at first reference! -->
 <li>I. J. Goodfellow, D. Erhan, P. L. Carrier, A. Courville, M. Mirza, B. Hamner, W. Cukierski, Y. Tang, D. Thaler, and D.H. Lee,
@@ -775,14 +625,14 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
         J. Deng, N. Cummins, J. Han, X. Xu, Z. Ren, V. Pandit, Z. Zhang, and B. Schuller, <b>The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge</b>, in Chinese Conference on Pattern Recognition. Singapore, SGP: Springer, 2016, pp. 652–666.
     </li>
     <li>
-        T. Baltrušaitis, P. Robinson, and L. P. Morency, <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>: An Open Source Facial Behavior Analysis Toolkit. in IEEE Winter Conference on Applications of Computer Vision, 2016.
+        T. Baltrušaitis, P. Robinson, and L. P. Morency, <b><a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>: An Open Source Facial Behavior Analysis Toolkit. in IEEE Winter Conference on Applications of Computer Vision</b>, 2016.
     </li>
 	<li>
-        D. Lundqvist, A. Flykt, and A. Öhman, <b>The Karolinska Directed Emotional Faces - <a href="http://www.emotionlab.se/resources/kdef">KDEF</a></b>, CD-ROM from Department of Clinical Neuroscience, Psychology section, Karolinska Institutet, ISBN 91-630-7164-9, 1998.
+        D. Lundqvist, A. Flykt, and A. Ohman, <b>The Karolinska Directed Emotional Faces - <a href="http://www.emotionlab.se/resources/kdef">KDEF</a></b>, CD-ROM from Department of Clinical Neuroscience, Psychology section, Karolinska Institutet, ISBN 91-630-7164-9, 1998.
     </li>
 
     <li>
-        Y. Tang, Deep Learning using Linear Support Vector Machines, CoRR abs/1306.0239 (2013).
+        Y. Tang, <b>Deep Learning using Linear Support Vector Machines</b>, CoRR abs/1306.0239 (2013).
     </li>
 
     <li>
@@ -798,7 +648,7 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
         B. Farnsworth, <b>Facial Action Coding System (FACS), A Visual Guidebook</b> <a href ="https://imotions.com/blog/facial-action-coding-system/">https://imotions.com/blog/facial-action-coding-system/</a> , 2016.
     </li>
     <li>
-        Emotion Recognition in the Wild Challenge 2017 <a href="http://icmi.acm.org/2017/index.php?id=challenges">http://icmi.acm.org/2017/index.php?id=challenges</a>, 2017.
+        <b>Emotion Recognition in the Wild Challenge</b> <a href="http://icmi.acm.org/2017/index.php?id=challenges">http://icmi.acm.org/2017/index.php?id=challenges</a>, 2017.
     </li>
     <li>
         Joint Challenge on Dominant and Complementary Emotion Recognition Using Micro Emotion Features and Head-Pose Estimation,
@@ -817,14 +667,218 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
         D. Amin, P. Chase, K. Sinha, <b>Touchy Feely: An Emotion Recognition Challenge</b>, Stanford CS231 Project Report, 2017.
     </li>
     <li>
-        AVEC 2016, Depression, Mood, and Emotion, The 6th Audio/Visual Emotion Challenge and Workshop,
+        <b>AVEC 2016, Depression, Mood, and Emotion</b>, The 6th Audio/Visual Emotion Challenge and Workshop,
         <a href="http://sspnet.eu/avec2016/">http://sspnet.eu/avec2016/</a>, 2016.
     </li>
 
 </ol>
 </div>
+
+<hr>
+<h3>
+    Appendix
+</h3>
+<table style="width: 100%;" border="1">
+    <tbody>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"><strong>Action Unit</strong></td>
+        <td style="height: 21px; width: 15%;"><strong>Description</strong></td>
+        <td style="height: 21px; width: 31.3582%;"><strong>Facial Muscle</strong></td>
+        <td style="height: 21px; width: 38.6418%;"><strong>Example</strong></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 1</td>
+        <td style="height: 21px; width: 15%;">Inner Brow Raiser</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars medialis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12727" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-FACS.gif" alt="AU1 FACS" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 2</td>
+        <td style="height: 21px; width: 15%;">Outer Brow Raiser (unilateral, right side)</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Frontalis, pars lateralis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12728" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-right-only.gif" alt="AU2 right only FACS" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 4</td>
+        <td style="height: 21px; width: 15%;">Brow Lowerer</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Depressor Glabellae, Depressor Supercilli, Currugator</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 5</td>
+        <td style="height: 21px; width: 15%;">Upper Lid Raiser</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Levator palpebrae superioris</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12729" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5.gif" alt="AU5 FACS" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 6</td>
+        <td style="height: 21px; width: 15%;">Cheek Raiser</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars orbitalis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12383" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 7</td>
+        <td style="height: 21px; width: 15%;">Lid Tightener</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Orbicularis oculi, pars palpebralis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 9 (also shows slight AU4 and AU10)</td>
+        <td style="height: 21px; width: 15%;">Nose Wrinkler</td>
+        <td style="height: 21px; width: 31.3582%;"> <em>Levator labii superioris alaquae nasi</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12730" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-with-410.gif" alt="AU9 with 4+10" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 10 (also shows slight AU25)</td>
+        <td style="height: 21px; width: 15%;">Upper Lip Raiser</td>
+        <td style="height: 21px; width: 31.3582%;"><em> Levator Labii Superioris, Caput infraorbitalis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12731" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU10-with-25.gif" alt=" AU10 with 25" width="300" height="100" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 12</td>
+        <td style="height: 21px; width: 15%;">Lip Corner Puller</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Zygomatic Major</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12733" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12.gif" alt="AU12" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 14</td>
+        <td style="height: 21px; width: 15%;">Dimpler</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Buccinator</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 15</td>
+        <td style="height: 21px; width: 15%;">Lip Corner Depressor</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Depressor anguli oris (Triangularis)</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12734" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15.gif" alt="AU15 FACS" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 17</td>
+        <td style="height: 21px; width: 15%;">Chin Raiser</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Mentalis</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12736" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU17.gif" alt="AU17 FACS guide" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 20</td>
+        <td style="height: 21px; width: 15%;">Lip stretcher</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Risorius </em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 23</td>
+        <td style="height: 21px; width: 15%;">Lip Tightener</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 25</td>
+        <td style="height: 21px; width: 15%;">Lips part</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Depressor Labii, Relaxation of Mentalis (AU17), Orbicularis Oris</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12399" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU25-lips-part.gif" alt="AU25 lips part" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 26</td>
+        <td style="height: 21px; width: 15%;">Jaw Drop</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Masetter; Temporal and Internal Pterygoid </em>relaxed</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12740" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-with-25.gif" alt="AU26 with 25 FACS affectiva" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 28</td>
+        <td style="height: 21px; width: 15%;">Lip Suck</td>
+        <td style="height: 21px; width: 31.3582%;"><em>Orbicularis oris</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-full wp-image-12741" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU28-with-26.gif" alt="AU28 with 26 FACS affectiva" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"> 45</td>
+        <td style="height: 21px; width: 15%;">Blink</td>
+        <td style="height: 21px; width: 31.3582%;">Relaxation of <em>Levator Palpebrae and Contraction of Orbicularis Oculi, Pars Palpebralis.</em></td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12407" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU45-blink.gif" alt=" AU45 blink" width="300" height="150"  /></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<p>
+    Each emotion can be associated to a set of AUs. Some examples are given in the table below.
+</p>
+<p>
+    <br>
+    <br>
+<table style="width: 100%;" border="1">
+    <tbody>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;"><b>Emotion</b></td>
+        <td style="height: 21px; width: 15%;"><strong>Action Units</strong></td>
+        <td style="height: 21px; width: 31.3582%;"><strong>Description</strong></td>
+        <td style="height: 21px; width: 38.6418%;"><strong>Examples (Hover to Play)</strong></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Happiness / Joy</td>
+        <td style="height: 21px; width: 15%;">6 + 12</td>
+        <td style="height: 21px; width: 31.3582%;">Cheek Raiser, Lip Corner Puller</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="size-medium wp-image-12383 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU6-cheek-raiser.gif" alt="AU6 cheek raiser" width="300" height="150" /></p>
+<p><img class="size-medium wp-image-12388 aligncenter" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Sadness</td>
+        <td style="height: 21px; width: 15%;">1 + 4 + 15</td>
+        <td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Brow Lowerer, Lip Corner Depressor</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Surprise</td>
+        <td style="height: 21px; width: 15%;">1 + 2 + 5 + 26</td>
+        <td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Upper Lid Raiser, Jaw Drop</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Fear</td>
+        <td style="height: 21px; width: 15%;">1 + 2 + 4 + 5 + 7 + 20 + 26</td>
+        <td style="height: 21px; width: 31.3582%;">Inner Brow Raiser, Outer Brow Raiser, Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Stretcher, Jaw Drop</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12378" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU1-inner-brow-raiser.gif" alt="AU1 inner brow raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12379" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU2-outer-brow-raiser.gif" alt="au2 outer brow raiser" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12395" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20 lip stretcher" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12400" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU26-jaw-drop.gif" alt="AU26 jaw drop" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Anger</td>
+        <td style="height: 21px; width: 15%;">4 + 5 + 7 + 23</td>
+        <td style="height: 21px; width: 31.3582%;">Brow Lowerer, Upper Lid Raiser, Lid Tightener, Lip Tightener</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12380" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="au4 brow lowerer" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12382" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU5-upper-lid-raiser.gif" alt="au5 upper lid raiser" width="300" height="150"/></p>
+<p><img class="aligncenter size-medium wp-image-12384" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU7-lid-tightener.gif" alt="AU7 lid tightener" width="300" height="150"/></p>
+<p><img class="aligncenter size-medium wp-image-12397" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23 lip tightener" width="300" height="150" /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Disgust</td>
+        <td style="height: 21px; width: 15%;">9 + 15 + 16</td>
+        <td style="height: 21px; width: 31.3582%;">Nose Wrinkler, Lip Corner Depressor, Lower Lip Depressor</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12385" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU9-nose-wrinkler.gif" alt="AU9 nose wrinkler" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12391" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU15-lip-corner-depressor.gif" alt="AU15 lip corner depressor" width="300" height="150"  /></p>
+<p><img class="aligncenter size-medium wp-image-12392" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU16-lower-lip-depressor.gif" alt="AU16 lower lip depressor" width="300" height="150"  /></td>
+    </tr>
+    <tr style="height: 21px;">
+        <td style="height: 21px; width: 10%;">Contempt</td>
+        <td style="height: 21px; width: 15%;">12 + 14 (on one side of the face)</td>
+        <td style="height: 21px; width: 31.3582%;">Lip Corner Puller, Dimpler</td>
+        <td style="height: 21px; width: 38.6418%;"><img class="aligncenter size-medium wp-image-12388" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU12-lip-corner-puller.gif" alt="AU12 lip corner puller" width="300" height="150" /></p>
+<p><img class="aligncenter size-medium wp-image-12390" src="https://cdn.imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14 dimpler" width="300" height="150" /></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
 </body>
-
-
 
 </html>

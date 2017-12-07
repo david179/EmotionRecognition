@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Report/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="724" column="20" lean-forward="false" selection-start-line="724" selection-start-column="20" selection-end-line="724" selection-end-column="20" />
+            <state relative-caret-position="603">
+              <caret line="880" column="0" lean-forward="true" selection-start-line="880" selection-start-column="0" selection-end-line="880" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -29,6 +29,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>kdef</find>
+      <find>desired</find>
+      <find>svm</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -47,7 +49,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="1" />
     <option name="y" value="155" />
-    <option name="width" value="1908" />
+    <option name="width" value="1914" />
     <option name="height" value="871" />
   </component>
   <component name="ProjectView">
@@ -116,18 +118,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512616434043</updated>
-      <workItem from="1512616436029" duration="5314000" />
+      <workItem from="1512616436029" duration="9363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5314000" />
+    <option name="totallyTimeSpent" value="9363000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="155" width="1908" height="871" extended-state="0" />
+    <frame x="1" y="155" width="1914" height="871" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18343815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18286312" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -159,8 +161,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Report/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="724" column="20" lean-forward="false" selection-start-line="724" selection-start-column="20" selection-end-line="724" selection-end-column="20" />
+        <state relative-caret-position="603">
+          <caret line="880" column="0" lean-forward="true" selection-start-line="880" selection-start-column="0" selection-end-line="880" selection-end-column="0" />
           <folding />
         </state>
       </provider>
