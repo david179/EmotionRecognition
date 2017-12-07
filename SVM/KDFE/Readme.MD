@@ -1,8 +1,10 @@
 # How to run
 
-Use openface to get the AUs.
+Given a set of `.jpg` images use [Openface](https://github.com/TadasBaltrusaitis/OpenFace) to get the AUs.
 
-Get name of docker container 
+This can be achieved by running the following commands:
+
+Get name of docker container:
 
 `docker ps`
 
