@@ -1,3 +1,6 @@
+'''
+	Author: Davide Lucchi - 12/7/2017
+'''
 import time
 import argparse
 import os

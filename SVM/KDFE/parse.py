@@ -1,3 +1,6 @@
+'''
+	Author: Davide Lucchi - 12/7/2017
+'''
 import sys,re
 import numpy as np
 import os.path
