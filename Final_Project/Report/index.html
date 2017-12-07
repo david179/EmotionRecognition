@@ -58,13 +58,39 @@ width="119" height="120"></a>
 <h2> Project Problem Definition </h2>
 <p>
 Given the video of a person classify the emotion that their face is showing in each frame. 
-The algorithm will be applied to the videos of the 2016 presidential debate between Hilary Clinton and Donald
+The algorithm will be applied to the videos of the 2016 presidential debate between Hillary Clinton and Donald
 Trump where each video shows only one candidate. Our target emotions are
 neutral, happy, sad, surprise, fear, disgust and anger.
 
 </p>
 <p>
-    Emotion recognition has many applications like smart home automation, self-driving cars, improving the classroom dynamics based on the students' emotion, and helping people with disabilities based on their emotion.
+    Emotion recognition has many applications like smart home automation, self-driving cars,
+    improving the classroom dynamics based on the students' emotions, and helping people with disabilities based on their perceived affections. Emotion/expression
+    recognition is studied under affective computing as a way for the human-computer interaction (<b>HCI</b>) as well as human-robot interaction (<b>HRI</b>).
+    Emotion recognition is one of the harder tasks in computer vision tasks spectrum with respect to achieved accuracy.
+    The problem of emotion/expression recognition would be even harder when studied in other modalities like face sketches, face caricature and/or
+    when special filters are applied that has deformed/malformed the face in a way that detectable by a human and by not probably a computer.
+    Most of the efforts in the emotion recognition literature has been performed in normal human faces and only for a very few (7) emotions.
+    Additionally, most of the research in the community has been geared towards winning the challenges for emotion recognition like
+    EmotiW (Emotion Recognition in the Wild Challenge), DCER&HPE (Joint Challenge on Dominant and Complementary Emotion
+    Recognition Using Micro Emotion Features and Head-Pose Estimation), FERA (Facial Expression Recognition and Analysis Challenge), MEC (
+    Multimodal Emotion Recognition Challenge), EmotiW 5.0, and AVEC (Audio/Visual Emotion Challenge).
+
+    EmotiW challenge goal is to provide a standard platform for emotion recognition.
+    The first EmotiW (2013), brought the attention of researchers to emotion recognition in <b>Acted Facial Expression in the Wild</b>(AFEW). In EmotiW 2015,
+    a new emotion recognition challenge was introduced with the emerge of <b>Static Facial Expression in the Wild</b>(SFEW) database. SFEW database is extracted
+    from AFEW database using a fiducial point-based clustering method.
+    The EmotiW 2015 highest classification accuracy of 54% for AFEW and 62% for SFEW
+    represents the needs for further research that needs to be done by the researchers in the field to improve the accuracy of emotion recognition. Reseachers have tried to
+    improve the emotion recognition from various corners including enhancing the accuracy of face and face part detection which plays the most crucial role in emotion
+    recognition, improve the head pose detection, as well as sorting out the problems with varied illumination, noise and lack of labeled data. The last problem has been
+    focus of many recent works in which they have used crowdsourcing in which they ask crowdsource workers to label the face emotions in large amount as done in AffectNet.
+    Some of the future meta-data that could be included in the datasets studied by researcher that could improve the accuracy of emotion recognition are as EEG, eye gaze estimation and eye gaze direction,
+    and skin galvanic response. Moreover, recent attention has been geared towards group-level emotion recognition as in EmotiW 5.0 challenge in which they try to analyze
+    the effect of a group of people in images.
+    The EmotiW 2013 winners used a deep neural network (DNN) method for detecting emotions. They used a convolutional neural network (CNN) for face analysis,
+    bag of words method for analysing the mouth area, and use of deep belief networks for audio signal processing.
+
 </p>
 <hr>
 
@@ -204,18 +230,17 @@ The training set consists of 28,709 examples and test set has a size of 3,589 ex
 </p>
 
 <p>
-For a first test, a 3 layer convolution neural network was build using Tensorflow as shown below. 
-<center>
-<table class="results">
+For a first test, a 3 layer convolution neural network was build using Tensorflow as shown below.
+<table class="results", align="center">
 <tr>
 	<td><img src="img/cnn.jpg"></img></td>
 </tr>
 <tr>
 <td class="caption">
 	<p>
-		<center>
+
 			Schema of the Neural Network used for our first test
-		</center>
+
 	</p>
 </td>
 </tr>
@@ -229,16 +254,12 @@ The 28,709 training examples in the FER-2013 dataset were used to train the conv
 from a preliminary setup a 58% accuracy was obtained for the 3,589 test set examples after 3000 iterations. The results for our
 preliminary cnn are shown below.
 
-
-
-<center>
 <table class="results">
 <tr>
-	<td><img src="img/cnn_results.png"></img></td>
-	<td><img src="img/cnn_results_confusion_matrix.png"></img></td>
+	<td><img src="img/cnn_results.png"></td>
+	<td><img src="img/cnn_results_confusion_matrix.png"></td>
 </tr>
 </table>
-</center>
 
 
 
@@ -260,14 +281,14 @@ and if time allows ResNet (starting with ResNet50 and extending it it to ResNet1
         recognition because the nature of emotion video segment is a temporal sequence.
 		
 		
-		<center>
+
 		<table class="results">
 		<tr>
-			<td><img src="img/Openface1.png"></img></td>
-			<td><img src="img/Openface2.png"></img></td>
+			<td><img src="img/Openface1.png"></td>
+			<td><img src="img/Openface2.png"></td>
 		</tr>
 		</table>
-		</center>
+
 
     </p>
 
@@ -641,12 +662,12 @@ Hilary
 
 <p> 
 The predictions highlight the differences and similarities between the two models. In particular,
-for Trump the biggest disagrement was between sad and angry. The FER model in fact interpreted most 
+for Trump the biggest disagreement was between sad and angry. The FER model in fact interpreted most
 of the non neutral expressions as sad while the KDEF as angry. A few of such frames are shown below.
 
 
 <h3>FER2013</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
 <td><img src="img/image22_fer.jpg"></td>
@@ -658,7 +679,7 @@ of the non neutral expressions as sad while the KDEF as angry. A few of such fra
     
 	
 <h3>KDEF</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
 <td><img src="img/image22_kdfe.jpg"></td>
@@ -676,7 +697,7 @@ The two models on the other hand agree on the neutral expression and
 seem to recognize them very accurately. Some examples are provided below.
 
 <h3>Frames both models predicted as neutral</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
 <td><img src="img/image261.jpg"></td>
@@ -689,7 +710,7 @@ seem to recognize them very accurately. Some examples are provided below.
 Another important difference is in the surprised emotion. A sample of such pictures is given for
 both models.
 <h3>FER2013</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
 <td><img src="img/image252_fer.jpg"></td>
@@ -701,7 +722,7 @@ both models.
     
 	
 <h3>KDEF</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
 <td><img src="img/image945_kdfe.jpg"></td>
@@ -775,6 +796,29 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
     </li>
     <li>
         B. Farnsworth, <b>Facial Action Coding System (FACS), A Visual Guidebook</b> <a href ="https://imotions.com/blog/facial-action-coding-system/">https://imotions.com/blog/facial-action-coding-system/</a> , 2016.
+    </li>
+    <li>
+        Emotion Recognition in the Wild Challenge 2017 <a href="http://icmi.acm.org/2017/index.php?id=challenges">http://icmi.acm.org/2017/index.php?id=challenges</a>, 2017.
+    </li>
+    <li>
+        Joint Challenge on Dominant and Complementary Emotion Recognition Using Micro Emotion Features and Head-Pose Estimation,
+        <a href="http://www.fg2017.org/index.php/challenges/">http://www.fg2017.org/index.php/challenges/</a>, 2017.
+    </li>
+    <li>
+        Multimodal Emotion Recognition Challenge (MEC 2017), <a href="http://www.chineseldc.org/htdocsEn/emotion.html">
+        http://www.chineseldc.org/htdocsEn/emotion.html</a>, 2017.
+    </li>
+    <li>
+        Group-level Emotion Recognition (EmotiW 5.0) ICMI 2017,
+        <a href="https://sites.google.com/site/emotiwchallenge/challenge-details">https://sites.google.com/site/emotiwchallenge/challenge-details</a>
+    </li>
+
+    <li>
+        D. Amin, P. Chase, K. Sinha, <b>Touchy Feely: An Emotion Recognition Challenge</b>, Stanford CS231 Project Report, 2017.
+    </li>
+    <li>
+        AVEC 2016, Depression, Mood, and Emotion, The 6th Audio/Visual Emotion Challenge and Workshop,
+        <a href="http://sspnet.eu/avec2016/">http://sspnet.eu/avec2016/</a>, 2016.
     </li>
 
 </ol>
