@@ -74,8 +74,8 @@ neutral, happy, sad, surprise, fear, disgust and anger.
     Additionally, most of the research in the community has been geared towards winning the challenges for emotion recognition like
     EmotiW (Emotion Recognition in the Wild Challenge), DCER and HPE (Joint Challenge on Dominant and Complementary Emotion
     Recognition Using Micro-Emotion Features and Head-Pose Estimation), FERA (Facial Expression Recognition and Analysis Challenge), MEC (
-    Multimodal Emotion Recognition Challenge), EmotiW 5.0, and AVEC (Audio/Visual Emotion Challenge). All these challenges come up with their own dataset. Additional
-    famous datasets for emotion recognition are FER2013, CK+, MMI facial expression database, KDEF and AffectNet. In this project, we worked with FER2013, KDEF and
+    Multimodal Emotion Recognition Challenge) [17], EmotiW 5.0 [18], and AVEC (Audio/Visual Emotion Challenge) [1]. All these challenges come up with their own dataset. Additional
+    famous datasets for emotion recognition are FER2013, CK+, MMI facial expression database, KDEF [9] and AffectNet. In this project, we worked with FER2013, KDEF and
     AffectNet datasets.
     Overall, what makes a good dataset depends on various factors like having exposure to colored images of various age groups, ethnicity groups, and genders besides
     having cleaned and organized labels. Indeed one of the datasets that we came across (EmotionNet) which included the Facial Action Units encoding for each image,
@@ -85,7 +85,7 @@ neutral, happy, sad, surprise, fear, disgust and anger.
     which include watermark in the images. These watermark potentially can degrade the prediction accuracy of machine learning and deep learning systems.
 </p>
 <p>
-    EmotiW challenge goal is to provide a standard platform for emotion recognition.
+    EmotiW [15] challenge goal is to provide a standard platform for emotion recognition.
     The first EmotiW (2013), brought the attention of researchers to emotion recognition in <b>Acted Facial Expression in the Wild</b> (AFEW). For example, the EmotiW 2013 winners used a deep neural network (DNN) method for detecting emotions. They used a convolutional neural network (CNN) for face analysis,
     bag of words method for analysing the mouth area, and use of deep belief networks for audio signal processing.In EmotiW 2015,
     a new emotion recognition challenge was introduced with the emerge of <b>Static Facial Expression in the Wild</b> (SFEW) database. SFEW database is extracted
@@ -244,14 +244,14 @@ AffectNet.
 </tr>
 <tr>
 <td>FER-2013</td>
-<td>ICML 2013 challenge [1]</td>
+<td>ICML 2013 challenge [11]</td>
 <td>35,887</td>
 <td> Wild </td>
 <td>7 emotions</td>
 </tr>
 <tr>
 <td>AffectNet</td>
-<td>Mollahosseini/Hasani/Mahoor[2]</td>
+<td>Mollahosseini/Hasani/Mahoor[3]</td>
 <td>450,000</td>
 <td> Wild </td>
 <td>7 emotions</td>
@@ -300,9 +300,9 @@ has a size of 512. Dropout layers of 0.4, batch normalization, and l2 regulariza
 
 <h3><p>SVM</p></h3>
 <p>
-    For this part we started with a baseline SVM code that detects emotion based on 68 facial landmarks.
+    For this part we started with a baseline SVM code [13] that detects emotion based on 68 facial landmarks.
 We implemented a SVM with facial action units. The Action Units were extracted with
- <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>
+ <a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a> [8]
 from the datasets FER2013 and Karolinska Directed Emotional Faces (KDEF).
 The KDEF dataset consists of 4900 pictures of 70 individuals each displaying 7 different emotional expressions. Each expressions is
 photographed from 5 different angles. The fact that the debate images have high resolution and that
@@ -721,7 +721,7 @@ they would be a great fit for our project.
         Experimenting with different types of ReLU (like Leaky ReLU) as well as different optimizers (Adam vs. SGD vs. RMSProp)
     </li>
     <li>
-        Drawing saliency maps to realize which pixels participate most for various emotions which would help us in debugging
+        Drawing saliency maps [19] to realize which pixels participate most for various emotions which would help us in debugging
         misclassification errors.
     </li>
     <li>
@@ -745,8 +745,11 @@ they would be a great fit for our project.
 <h3>References</h3>
 <ol>
     <!-- silvia please have a look at first reference! -->
-<li>I. J. Goodfellow, D. Erhan, P. L. Carrier, A. Courville, M. Mirza, B. Hamner, W. Cukierski, Y. Tang, D. Thaler, and D.H. Lee,
-    <b>Challenges in Representation Learning: A Report on Three Machine Learning Contests</b>, Neural Networks, vol. 64, pp. 59–63, 2015.</li>
+    <li>
+        <b>AVEC 2016, Depression, Mood, and Emotion</b>, The 6th Audio/Visual Emotion Challenge and Workshop,
+        <a href="http://sspnet.eu/avec2016/">http://sspnet.eu/avec2016/</a>, 2016.
+    </li>
+
 
 <li>A. Mollahosseini, B. Hasani, M. J. Salvador, H. Abdollahi, D. Chan, and M. H. Mahoor, <b>Facial Expression Recognition from
 World Wild Web</b>,in The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2016.
@@ -759,15 +762,15 @@ World Wild Web</b>,in The IEEE Conference on Computer Vision and Pattern Recogni
 social psychology,vol. 17, no. 2, p. 124, 1971.
     </li>
     <li>J. A. Russell, <b>A Circumplex Model of Affect</b>, Journal of Personality and Social Psychology,
- vol. 39, no. 6, pp. 1161–1178, 1980.
+ vol. 39, no. 6, pp. 1161-1178, 1980.
     </li>
     <li>P. Ekman and W. V. Friesen, <b>Facial Action Coding System</b>, 1977.</li>
 
     <li>
-        J. Deng, N. Cummins, J. Han, X. Xu, Z. Ren, V. Pandit, Z. Zhang, and B. Schuller, <b>The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge</b>, in Chinese Conference on Pattern Recognition. Singapore, SGP: Springer, 2016, pp. 652–666.
+        J. Deng, N. Cummins, J. Han, X. Xu, Z. Ren, V. Pandit, Z. Zhang, and B. Schuller, <b>The University of Passau Open Emotion Recognition System for the Multimodal Emotion Challenge</b>, in Chinese Conference on Pattern Recognition. Singapore, SGP: Springer, 2016, pp. 652-666.
     </li>
     <li>
-        T. Baltrušaitis, P. Robinson, and L. P. Morency, <b><a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>: An Open Source Facial Behavior Analysis Toolkit. in IEEE Winter Conference on Applications of Computer Vision</b>, 2016.
+        T. Baltrusaitis, P. Robinson, and L. P. Morency, <b><a href="https://github.com/TadasBaltrusaitis/OpenFace">OpenFace</a>: An Open Source Facial Behavior Analysis Toolkit. in IEEE Winter Conference on Applications of Computer Vision</b>, 2016.
     </li>
 	<li>
         D. Lundqvist, A. Flykt, and A. Ohman, <b>The Karolinska Directed Emotional Faces - <a href="http://www.emotionlab.se/resources/kdef">KDEF</a></b>, CD-ROM from Department of Clinical Neuroscience, Psychology section, Karolinska Institutet, ISBN 91-630-7164-9, 1998.
@@ -808,10 +811,6 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
     <li>
         D. Amin, P. Chase, K. Sinha, <b>Touchy Feely: An Emotion Recognition Challenge</b>, Stanford CS231 Project Report, 2017.
     </li>
-    <li>
-        <b>AVEC 2016, Depression, Mood, and Emotion</b>, The 6th Audio/Visual Emotion Challenge and Workshop,
-        <a href="http://sspnet.eu/avec2016/">http://sspnet.eu/avec2016/</a>, 2016.
-    </li>
 
 </ol>
 </div>
@@ -827,8 +826,14 @@ Division of work:
 Davide: action units classification using SVM, FER-2013 emotion classification using 3 layer CNNs 
 </p>
 <p>
+    Mona: Acquiring and cleaning AffectNet Dataset, Setting up OpenFace Cambridge Docker on CentOS, Extracting AUs and landmarks from OpenFace for 500k AffectNet dataset,
+    setting up and running the baseline SVM on FER2013 dataset, taking care of the debate video, related work study.
+</p>
+<p>
 Silvia: FER-2013 emotion classification using 3 layer CNNs and VGG16, AffectNet using VGG16
 </p>
+
+<p>Below tables are from [14].</p>
 
 <table style="width: 100%;" border="1">
     <tbody>
