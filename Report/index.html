@@ -418,21 +418,21 @@ at each convolution layer as shown below. For this layout our test accuracy reac
 </table>
 </p>
 
+<p>
 AffectNet is a large dataset containing ~450,000(60GB) RGB images that were manually annotated, and taken in wild conditions, which means that are pulled from the web. 
 This dataset has 11 categories for emotion classification (0=Neutral, 1=Happy, 2=Sad, 3=Surprise, 4=Fear, 5=Disgust, 6=Anger, 7=Contempt, 8=None, 9=Uncertain, 10=Non-face).
 </p>
-</p> 
+
+<p> 
 For this dataset, we initially pulled ~210,000 images from only the first 8 classes of emotion. These images were resized to 48x48 size, cropped to contain only the face, 
 and transformed to grayscale. 
 Using the VGG16 network described earlier with dropout, batch normalization, and l2 normalization we tried testing for different learning rates as shown below on the left. This 
 gave us a test accuracy of 50% after 100 epochs.   
-
-<p>
-For AffectNet, we also tried using RGB images for training the CNN network. In order to speed up the training process, we pulled 37k and 64k images form the 8 classes and tested
-2 different learning rates. The results for the RGB images are shown below on the right and it gave us a test accuracy of 55%. 
-<p>
-For AffectNet,  
 </p>
+<p>
+For AffectNet, we also tried using RGB images for training the CNN network. In order to speed up the training process, we pulled only 37k and 64k images from AffectNEt
+representing only 8 classes and tested 2 different learning rates. The results for the RGB images are shown below on the right and it gave us a test accuracy of 55%. 
+
 <p>
 </p>
 <table align="center">
@@ -446,7 +446,7 @@ For AffectNet,
 </p>
 <hr>
 
-<h3>Results</h3>
+<h3>Results and Discussion</h3>
 
 
 <h4><p>SVM Comparison</p></h4>
@@ -694,6 +694,9 @@ For the Donald Trump image classification, the angry and sad classified images l
 </tbody>
 </table>
 
+<p>
+As a final conclusion, for the FER-2013 dataset the CNNs performed better then SVMs and action units.  
+</p>
 <hr>
 
 
@@ -817,6 +820,16 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
 <h3>
     Appendix
 </h3>
+<p>
+Division of work:
+</p>
+<p>
+Davide: action units classification using SVM, FER-2013 emotion classification using 3 layer CNNs 
+</p>
+<p>
+Silvia: FER-2013 emotion classification using 3 layer CNNs and VGG16, AffectNet using VGG16
+</p>
+
 <table style="width: 100%;" border="1">
     <tbody>
     <tr style="height: 21px;">
