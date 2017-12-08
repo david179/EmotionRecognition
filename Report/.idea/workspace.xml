@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="829" column="116" lean-forward="true" selection-start-line="829" selection-start-column="116" selection-end-line="829" selection-end-column="116" />
+            <state relative-caret-position="32">
+              <caret line="321" column="100" lean-forward="true" selection-start-line="321" selection-start-column="100" selection-end-line="321" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -84,6 +84,11 @@
               <item name="Report" type="b2602c69:ProjectViewProjectNode" />
               <item name="Report" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Report" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Report" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -94,6 +99,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/img" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -121,18 +131,18 @@
       <option name="presentableId" value="Default" />
       <updated>1512590796439</updated>
       <workItem from="1512590797816" duration="5234000" />
-      <workItem from="1512707217044" duration="968000" />
+      <workItem from="1512707217044" duration="1360000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6202000" />
+    <option name="totallyTimeSpent" value="6594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="28" width="1260" height="705" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.008878128" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2590799" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -171,8 +181,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="829" column="116" lean-forward="true" selection-start-line="829" selection-start-column="116" selection-end-line="829" selection-end-column="116" />
+        <state relative-caret-position="32">
+          <caret line="321" column="100" lean-forward="true" selection-start-line="321" selection-start-column="100" selection-end-line="321" selection-end-column="100" />
           <folding />
         </state>
       </provider>
