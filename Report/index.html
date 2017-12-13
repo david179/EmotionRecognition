@@ -51,6 +51,8 @@ width="119" height="120"></a>
  12/7/2017
 </p>
 
+<br>
+<h2><a href="https://drive.google.com/open?id=14xfbT8Kl0Tatkaj_6DtMJrs0naPZdOrltExR7xDzlw4">Link to Presentation</a></h2>
 <hr>
 
 <p class="main-body">
@@ -275,7 +277,6 @@ two classes while maximizing the margin between the two classes. The SVM optimiz
 </tr>
 
 </table>
-</center>
 </p>
 
 <p>
@@ -285,20 +286,20 @@ has a size of 512. Dropout layers of 0.4, batch normalization, and l2 regulariza
 </p>
 
 <p>
-<table class="results", align="center">
-<tr>
-	<td><img src="img/VGG_architecture.jpg"></img></td>
-	<td><img src="img/VGG_architecture_2.jpg"></img></td>
-</tr>
-
-</table>
+<figure>
+<center>
+<img src="img/VGG_architecture.jpg"></img>
+<img src="img/VGG_architecture_2.jpg"></img>
+<figcaption>Fig. 1 - Convolutional Neural Network Architecture (VGG16) </figcaption>
+</figure>
 </center>
 </p>
+
 
 <hr>
  <h2>Experimental Setup</h2>
 
-<h3><p>SVM</p></h3>
+<h3>1.<u>SVM</u></h3>
 <p>
     For this part we started with a baseline SVM code [13] that detects emotion based on 68 facial landmarks.
 We implemented a SVM with facial action units. The Action Units were extracted with
@@ -383,67 +384,80 @@ been predicted by the SVM.
 <br>
 
 
-<h3>Convolutional Neural Networks(CNNs)</h3>
+<h3>2.<u>Convolutional Neural Networks(CNNs)</u></h3>
+<h4><p><u>A. FER-2013 Dataset</p></u></h4>
 
 <p>
 The FER-2013 dataset consists of 35,887 images that are queried from the web. The data consists of 48x48 pixel grayscale images of faces. 
-The faces have been automatically registered so that the face is more or less centered and occupies about the same amount of space in each image. 
+The faces have been automatically registered so that the face is centered and occupies about the same amount of space in each image. 
 The task is to categorize each face based on the emotion shown in the facial expression in to one of seven categories 
 (0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral). The training set consists of 28,709 examples and test set has a size of 3,589 examples. 
 </p>
 
 <p>
-For the FER-2013 dataset, the VGG16 architecture was implemented using Keras with tensorflow backend. 
-This architecture was tested with both data augmentation and without using Keras ImageDataGenerator. Our accuracy results increased from 60% to 65% with the data augmentation, therefore 
-we continued to use data augmentation for our next optimization section. We used a rotation_range=15, width_shift_range=0.1, height_shift_range=0.1 for the data augmentation parameters. 
+For the FER-2013 dataset, the VGG16 architecture(shown above) was implemented using Keras with tensorflow backend. 
+This architecture was tested with both data augmentation and without using Keras ImageDataGenerator. Our test accuracy results increased from 60% to 65% with the data augmentation, therefore 
+we continued to use data augmentation for our next optimization section. A rotation_range=15, width_shift_range=0.1, height_shift_range=0.1 was used for the image augmentation parameters. 
 </p>
 <p>
-Four different learning rates were tested(0.1, 0.05, 0.01, 0.005) over 200 epochs as shown below. As we can see the accuracy increases as the learning rate decreases to 0.001.     
-</p>
-
-
-<p>
-<table align="center">
-<tbody>
-<tr>
-<td><img src="img/Fer_2013_test_acc_lr_comp.jpg" width="350px" height="350px"></td>
-<td><img src="img/Fer_2013_test_loss_lr_comp.jpg" width="350px" height="350px"></td>
-</tr>
-</tbody>
-</table>
+The starting point in the CNN experimental setup was to test a range of leaning rates for the stochastic gradient descent optimizer. Fig. 2 shows the test accuracy 
+and loss results for four different learning rates (0.1, 0.05, 0.01, 0.005) over 200 epochs. 
+We noticed that the test accuracy increases as the learning rate decreases to 0.01 and 0.005, however we notice that the test loss for these two leaning rates starts increasing slightly 
+after 150 epochs. 
+     
 </p>
 
 <p>
-Adding a 0.5 dropout layer after each convolution layer was tested. As we can see below after 200 epochs the dropout layer and non-dropout layer reach the same accuracy of 68%, 
-however the loss for the dropout layer performs better, therefore we used a 0.5 dropout layer in our architecture.
+<figure>
+<center>
+<img src="img/Fer_2013_test_acc_lr_comp.jpg" width="350px" height="350px"></img>
+<img src="img/Fer_2013_test_loss_lr_comp.jpg" width="350px" height="350px"></img>
+<figcaption>Fig. 2 - FER2013 test accuracy and loss plots vs. epochs for leaning rates = 0.1, 0.05. 0.01, 0.005 </figcaption>
+</figure>
+</center>
+</p>
+
+
+
+<p>
+Because of the increase in the test loss for learning rates 0.01 and 0.005 after 150 epochs, we decided to try adding a 0.5 dropout layer and l2 regularization after each convolution
+layer. Fig. 3 below shows that the test accuracy remains the same ~ 68%, however the test loss has a smaller increase as the number of epochs increases. 
+Due to this test results we decided to use a 0.5 dropout layer and l2 regularization in our architecture moving forward.
 </p>
 
 <p>
-<table align="center">
-<tbody>
-<tr>
-<td><img src="img/FER_2013_Test_Acc_dropout.jpg" width="350px" height="350px"></td>
-<td><img src="img/Fer_2013_Test_Loss_dropout.jpg" width="350px" height="350px"></td>
-</tr>
-</tbody>
-</table>
+<figure>
+<center>
+<img src="img/FER_2013_Test_Acc_dropout.jpg" width="350px" height="350px"></img>
+<img src="img/Fer_2013_Test_Loss_dropout.jpg" width="350px" height="350px"></img>
+<figcaption>Fig. 3 - FER2013 test accuracy and loss plots vs. epochs. Dropout layer/l2 regularization and without comparison.</figcaption>
+</figure>
+</center>
 </p>
+
+
 
 <p> 
-We also tried decreasing the learning rate every 25 epochs by 2, starting with a learning rate = 0.1, while using  a 0.5 dropout, batch normalization and l2 regularization 
-at each convolution layer as shown below. For this layout our test accuracy reached 68.5%. 
+Due to the increase in test accuracy as the learning rate decreases, we decided to start with a learning rate of 0.1 and decrease it by half every 25 epochs. 
+This was done in combination with a dropout layer, batch normalization, and l2 regularization at each convolution layer. This hyper-parameters 
+setup gave us a test accuracy of 69.3%. Fig. 4 displays these results for the train and test accuracy and loss as a function of epochs. We notice from the 
+figures below that our CNN are overfitting, however this issue could not be overcome by data augmentation, dropout layer or regularization.  
+
 </p>
 
 <p>
-<table align="center">
-<tbody>
-<tr>
-<td><img src="img/Fer_2013_Test_Accuracy_lr_gradual.jpg" width="350px" height="350px"></td>
-<td><img src="img/Fer_2013_Test_Loss_lr_gradual.jpg" width="350px" height="350px"></td>
-</tr>
-</tbody>
-</table>
+<figure>
+<center>
+<img src="img/Fer_2013_Train_Test_Accuracy_lr_gradual.jpg" width="350px" height="350px""></img>
+<img src="img/Fer_2013_Train_Test_Loss_lr_gradual.jpg" width="350px" height="350px"></img>
+<figcaption>Fig. 4 - FER2013 train and test accuracy and loss plots vs. # of epochs.</figcaption>
+</figure>
+</center>
 </p>
+
+
+<h4><p><u>B. AffectNet Dataset</p></u></h4>
+
 
 <p>
 AffectNet is a large dataset containing ~450,000(60GB) RGB images that were manually annotated, and taken in wild conditions, which means that are pulled from the web. 
@@ -451,32 +465,43 @@ This dataset has 11 categories for emotion classification (0=Neutral, 1=Happy, 2
 </p>
 
 <p> 
-For this dataset, we initially pulled ~210,000 images from only the first 8 classes of emotion. These images were resized to 48x48 size, cropped to contain only the face, 
-and transformed to grayscale. 
-Using the VGG16 network described earlier with dropout, batch normalization, and l2 normalization we tried testing for different learning rates as shown below on the left. This 
-gave us a test accuracy of 50% after 100 epochs.   
-</p>
-<p>
-For AffectNet, we also tried using RGB images for training the CNN network. In order to speed up the training process, we pulled only 37k and 64k images from AffectNEt
-representing only 8 classes and tested 2 different learning rates. The results for the RGB images are shown below on the right and it gave us a test accuracy of 55%. 
+For the training set, we initially pulled ~210,000 images from only the first 8 classes of emotion (0=Neutral, 1=Happy, 2=Sad, 3=Surprise, 4=Fear, 5=Disgust, 6=Anger, 7=Contempt). 
+These images were resized to 48x48 size, cropped to contain only the face, 
+and transformed to grayscale. The test set had a size of 4,000 images with classifications belonging to the first 8 classes of emotion. 
+Using the VGG16 network described earlier in combination with dropout layers, batch normalization, and l2 normalization we tried testing for different learning rates 0.1, 0.05, 0.001.
+The best test accuracy of 50% after 100 epochs is obtained using a learning rate of 0.05 for these hyperparameters, as shown in Fig. 5.
+ </p>
 
 <p>
+<figure>
+<center>
+<img src="img/AffectNet_Test_Accuracy_Grayscale.jpg" width="350px" height="350px""></img>
+<img src="img/AffectNet_Test_Loss_Grayscale.jpg" width="350px" height="350px"></img>
+<figcaption>Fig. 5 - AffectNet test accuracy and loss plots vs. # of epochs for grayscale images.</figcaption>
+</figure>
+</center>
 </p>
-<table align="center">
-<tbody>
-<tr>
-<td><img src="img/AffectNet_Test_Accuracy_Grayscale.jpg" width="350px" height="350px"></td>
-<td><img src="img/AffectNet_Test_Accuracy_RGB.jpg" width="350px" height="350px"></td>
-</tr>
-</tbody>
-</table>
+
+<p>
+For AffectNet, we also tried using RGB images for training the CNN network. In order to speed up the training process, we pulled only 37k and 64k images for the training set from AffectNet
+representing only 8 classes and tested 2 different learning rates. The results for the RGB images are shown below and this setup gave us a test accuracy of 55%. 
+
 </p>
+<p>
+<figure>
+<center>
+<img src="img/AffectNet_Test_Accuracy_RGB.jpg" width="350px" height="350px"></img>
+<img src="img/AffectNet_Test_Loss.jpg" width="350px" height="350px""></img>
+<figcaption>Fig. 6 - AffectNet test accuracy and loss plots vs. # of epochs for RGB images.</figcaption>
+</figure>
+</center>
+</p>
+
 <hr>
+<h2>Results and Discussion</h2>
 
-<h3>Results and Discussion</h3>
 
-
-<h4><p>SVM Comparison</p></h4>
+<h3><u>1.SVM Comparison</u></h3>
 <p>
 One every four frames was extracted from each input video and for each of them the SVM models
 were used to predict the emotion in that frame. 
@@ -579,9 +604,6 @@ could be achieved by merging the two datasets.
 For the surprised emotion it would be better to use only the 
 images provided by FER2013 while for angry only the images of KDEF.
 </p>
-
-
-
 
 <p> 
 The same analysis can be carried out for Hillary Clinton as well. Here
@@ -692,14 +714,85 @@ which suggests that the models do not assign those labels randomly but the data 
 </p>
 
 
-<hr>
+<h3><u>2. Convolutional Neural Networks(CNNs)</u></h3>
+
+<p>
+As presented in the experimental setup section our CNN was better optimized for the FER2013 dataset(best test accuracy of 69%) compared to AffectNet(best test accuracy of 55%).
+Due to this reason we decided to use the FER2013 trained weights to classify the input videos of Hillary Clinton and Donald Trump. The hyper-parameters used to train the convolutional 
+neural network weights on the FER2013 dataset are shown in the below.    
+</p>
+
+<table align="center" border="1">
+<tbody>
+<tr>
+	<td>Hyper-parameter</td>
+	<td>Value</td>
+<tr>
+	<td>Learning Rate</td>
+	<td>Start at 0.1 and decrease every 25 epochs</td>
+</tr>
+<tr>
+	<td>Dropout Layer</td>
+	<td>0.5</td>
+
+</tr>
+<tr>
+	<td>L2 Regularization</td>
+	<td>0.0005</td>
+</tr>
+
+<tr>
+	<td>Batch size</td>
+	<td>128</td>
+</tr>
+<tr>
+	<td>Momentum</td>
+	<td>0.9</td>
+</tr>
+
+<tr>
+	<td>Rotation Range</td>
+	<td>0.15</td>
+</tr>
+
+<tr>
+	<td>Width Shift Range</td>
+	<td>0.1</td>
+</tr>
+
+<tr>
+	<td>Hight Shift Range</td>
+	<td>0.1</td>
+</tr>
 
 
+</tbody>
+</table>
 
-<h3>CNNs</h3>
 
-Our CNN architecture performed better using the FER2013 dataset. The image classification for Hillary Clinton works well 
-for the neutral, happy, and surprised classification, however the fear and sad classification is incorrect. 
+<p>
+As previously specified the FER2013 training set consists of 28,709 examples and test set has a size of 3,589 examples. The test accuracy for this dataset with thsese hyper-parameters 
+was 69.3%. The test accuracy results are shown in Fig. 4 and the confusion matrix results for each individual emotion are shown below in Fig. 7. 
+</p>
+
+</p>
+<p>
+<figure>
+<center>
+<img src="img/FER-2013_Test_confusion_matrix_250epochs.jpg" width="600px" height="450px"></img>
+<figcaption>Fig. 7 - FER2013 confusion matrix.</figcaption>
+</figure>
+</center>
+</p>
+
+<p>
+As we can see from the confusion matrix, the sad and fear emotion classification have the lowest accuracy. 
+We noticed that the sad classification is often misclassified as fear or neutral and that the fear classification is most often misclassified as sad and neutral.  
+</p>
+
+<p>
+Using the trained weights from the FER2013 dataset we classified the input images of Hillary and Trump. A sample of our classification results for Hillary Clinton are shown below. 
+</p>
 
 <table align="center">
 <tbody>
@@ -710,7 +803,13 @@ for the neutral, happy, and surprised classification, however the fear and sad c
 </tbody>
 </table>
 
-For the Donald Trump image classification, the angry and sad classified images look very similar.  Also, the image classified as surprised looks more angry. 
+<p>
+The image classification for Hillary Clinton for the neutral, happy, surprised, and disgust classification work well, however the fear and sad classification seam not properly classified. 
+</p>
+
+<p>
+ A sample of our classification results for Donald Trump have also been performed and are shown below.
+</p>
 
 <table align="center">
 <tbody>
@@ -722,12 +821,81 @@ For the Donald Trump image classification, the angry and sad classified images l
 </table>
 
 <p>
-As a final conclusion, for the FER-2013 dataset the CNNs performed better then SVMs and action units.  
+For the Donald Trump image classification, the angry and sad classified images look very similar.  Also, the image classified as surprised looks more angry to us. 
 </p>
+
+
+<h4><p>FER2013 CNN results</p></h4>
+
+<table class="center">
+
+<tr>
+
+<td align="center" valign="middle">Hilary Clinton</td>
+<td align="center" valign="middle">Donald Trump</td>
+</tr>
+<tr>
+<td>
+<video width="320" height="240" controls>
+  <source src="videos/Hilary_classified.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</td>
+<td>
+<video width="320" height="240" controls>
+ <source src="videos/Trump_classified.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</td>
+</tr>
+</table>
+
+
+
+Videos of 100 classified frames of both Hillary Clinton and Donald Trump using our convolutional neural network trained weights are shown above.
+The input videos were not previously classified, therefore we can not provide an accuracy for these classification. 
+These frames would have to be annotated by multiple people in order to properly provide an accuracy.  
+
+
 <hr>
+<h2>Conclusion</h2>
+
+<p>
+
+Emotion recognition could have many applications like smart home automation, self-driving cars, improving the classroom dynamics, and helping people with 
+disabilities based on their perceived affections. However, emotion detection and classification is a difficult problem to tackle since humans express emotion in 
+complex and diverse ways. We have attempted to classify emotion through two methods: Action Units/SVM and Convolutional Neural Networks. 
+</p>
+
+<p>
+Action units were extracted from two datasets FER2013 and KDEF and classified using Support Vector Machines(SVM). 
+For the FER2013 dataset we obtained  validation accuracy of 45.3% and a f1 score of 0.4218.
+The KDEF dataset performed better with a validation accuracy of 67.4% and a f1 score of 0.6709  after 10000 epochs. 
+The KDEF dataset performed better because the images were taken in a controlled/posed setting as opposed to the FER2013, which is a wild dataset.   
+</p> 
+
+<p>
+For the Convolutional Neural Network method, two datasets were tested FER2013 and AffectNet. We decided not to try it on KDEF datased due to the small number of images in this 
+datasest(4,900), which would have had to be split into training and testing sets.  In terms of the datasets that we used, the FER2013 had test accuracy of 69.3% using grayscale images. 
+For AffectNet, we obtained a test accuracy of 55% using RGB images. The reason for this difference in results while applying the same convolutional neural network architecture and similar 
+hyperparameters is because we used 8 emotion classes for AffectNet as opposed to 7 emotion classes for FER2013. This could also mean that the CNN hyper-parameters were not optimized 
+for the AffectNet dataset and that more parameter tuning needed to be performed. 
+
+AffectNet is a much bigger dataset ~450, 000 images and even thou 
+these images were manually annotated it could be that some of them were misclassified. Also, since  AffectNet images were collected from the Internet by querying three major search 
+engines using 1250 emotion related keywords in six different languages, it is possible that the classes of emotions are providing a wider range of images for that emotion the FER2013. 
+This could mean that we need to implement a different type of CNN architecture, such as Resnet50, in order to increase our accuracy.    
+</p>
+
+<p>
+As a final conclusion, for the FER-2013 dataset the CNNs performed better then SVMs and action units.
+The hyper-parameter tunings for the CNNs affect our results significantly and the 
+results from one dataset to another one are not transferable by default.
+</p>
 
 
 
+<hr>
 <h3>Future Works</h3>
 In what follows, we suggest some future works some of which we had in our initial plan but we didn't get the chance to do
 those experiments due to the time constraints of the project. Some of the other suggestions are based on the experiments we
@@ -850,14 +1018,14 @@ social psychology,vol. 17, no. 2, p. 124, 1971.
 Division of work:
 </p>
 <p>
-Davide: action units classification using SVM, FER-2013 emotion classification using 3 layer CNNs 
+Davide: Action units extraction and classification using SVM for FER2013 and KDEF datasets, FER-2013 emotion classification using 3 layer CNNs.  
 </p>
 <p>
-    Mona: Acquiring and cleaning AffectNet Dataset, Setting up OpenFace Cambridge Docker on CentOS, Extracting AUs and landmarks from OpenFace for 500k AffectNet dataset,
-    setting up and running the baseline SVM on FER2013 dataset, taking care of the debate video, related work study.
+Mona: Acquiring and cleaning AffectNet Dataset, Setting up OpenFace Cambridge Docker on CentOS, Extracting AUs and landmarks from OpenFace for 500k AffectNet dataset,
+setting up and running the baseline SVM on FER2013 dataset, taking care of the debate video, related work study.
 </p>
 <p>
-Silvia: FER-2013 emotion classification using 3 layer CNNs and VGG16, AffectNet using VGG16
+Silvia: FER2013 emotion classification using 3 layer CNNs and VGG16, AffectNet using VGG16. 
 </p>
 
 <p>Below tables are from [14].</p>
